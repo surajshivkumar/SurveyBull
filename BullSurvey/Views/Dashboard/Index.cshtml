@@ -1,0 +1,17 @@
+@model IEnumerable<BullSurvey.Models.Survey>
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1 class="text-2xl font-bold mb-4">Survey Questions Dashboard</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    @foreach (var survey in Model)
+    {   
+        <div class="card border border-green-300 shadow-lg rounded-lg p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer" onclick="location.href='@Url.Action("Dashboard", "DashBoard", new { id = survey.SurveyId })'">
+            <h2 class="font-semibold text-lg text-green-600">@survey.Title</h2>
+            <p class="text-gray-700">Responses: @survey.Description</p>
+        </div>
+    }
+</div>

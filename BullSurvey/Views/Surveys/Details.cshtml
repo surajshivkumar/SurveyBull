@@ -1,0 +1,58 @@
+@model BullSurvey.Models.Survey
+
+<div class="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
+    <!-- Survey Title and Description -->
+    <h1 class="text-4xl font-extrabold text-gray-800 mb-2">@Model.Title</h1>
+    <p class="text-lg text-gray-600 italic mb-8">@Model.Description</p>
+
+    <!-- Questions Section Header -->
+    <div class="mb-6">
+        <h3 class="text-2xl font-semibold text-gray-800 border-b-2 border-gray-300 pb-2">Questions</h3>
+    </div>
+
+    <div class="text-right mb-6">
+    @if (!Model.IsPublished)
+    {
+        <form asp-action="PublishSurvey" method="post" class="inline">
+            <input type="hidden" name="surveyId" value="@Model.SurveyId" />
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow-lg">
+                Publish Survey
+            </button>
+        </form>
+    }
+    else
+    {
+        <p class="text-green-600 font-semibold">This survey is published.</p>
+        <div class="mt-2">
+            <p>Survey Link: 
+                <a href="https://survey-bull.vercel.app/surveys/@Model.SurveyId" target="_blank" class="text-blue-500 hover:underline">
+                    https://survey-bull.vercel.app/surveys/@Model.SurveyId
+                </a>
+            </p>
+        </div>
+    }
+</div>
+
+    <!-- Questions List -->
+    <ul class="space-y-6">
+        @foreach (var question in Model.Questions)
+        {
+            <li class="p-6 bg-gray-100 rounded-lg shadow-sm">
+                <div class="text-xl font-semibold text-gray-900 mb-4">@question.Text</div>
+                
+                <!-- Options List -->
+                <ul class="pl-5 list-disc text-gray-700">
+                    @foreach (var option in question.Options)
+                    {
+                        <li class="mt-1 text-gray-600">@option.Text</li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</div>
+
+<!-- Footer -->
+<footer class="text-center py-6">
+    <p class="text-gray-500">&copy; 2024 SurveyBull - <a href="/Privacy" class="text-blue-500 hover:underline">Privacy</a></p>
+</footer>
