@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SurveyBull</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-
 </head>
 <body>
     <header>
         <nav class="bg-white border-b shadow-md">
             <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-                <a href="/" class="text-primary font-semibold text-xl">SurveyBull</a>
+                <a href="/" class="text-primary font-bold text-xl">SurveyBull</a>
                 <div>
-                    <a href="/" class="text-gray-600 hover:text-primary mx-4">Home</a>
-                    <a href="/Surveys" class="text-gray-600 hover:text-primary mx-4">Surveys</a>
-                    <a href="/Dashboard" class="text-gray-600 hover:text-primary mx-4">Dashboard</a>
+                    <a href="/" class="text-gray-600 hover:text-primary mx-4 @(Context.Request.Path.Value == "/" ? "text-primary font-bold" : "")">Home</a>
+                    <a href="/Surveys" class="text-gray-600 hover:text-primary mx-4 @(Context.Request.Path.Value.Contains("/Surveys") ? "text-primary font-bold" : "")">Surveys</a>
+                    <a href="/Dashboard" class="text-gray-600 hover:text-primary mx-4 @(Context.Request.Path.Value.Contains("/Dashboard") ? "text-primary font-bold" : "")">Dashboard</a>
+                    <a href="/AboutUs/AboutUs" class="text-gray-600 hover:text-primary mx-4 @(Context.Request.Path.Value.Contains("/AboutUs") ? "text-primary font-bold" : "")">About Us</a>
                 </div>
             </div>
         </nav>
@@ -36,3 +36,4 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+

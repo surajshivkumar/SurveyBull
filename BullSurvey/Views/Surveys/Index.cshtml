@@ -1,6 +1,6 @@
 @model IEnumerable<BullSurvey.Models.Survey>
 
-<h1 class="text-3xl font-bold mb-8 text-center">Surveys</h1>
+<h1 class="text-3xl font-bold mb-8 text-center text-green-500">Surveys</h1>
 
 <div class="mb-8 text-right">
     <a asp-action="Create" class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300">
@@ -17,7 +17,7 @@
                 <h2 class="text-2xl font-semibold text-gray-800">@survey.Title</h2>
 
                 <!-- Publish/View Link Button -->
-                <a asp-action="Publish" asp-route-id="@survey.SurveyId" 
+                <a asp-action="Publish" asp-route-id="@survey.SurveyId"
                    class="bg-green-500 hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded shadow-md transition duration-300">
                     @if (survey.IsPublished)
                     {
@@ -30,8 +30,10 @@
                 </a>
             </div>
 
-            <p class="text-gray-600 mb-4">@survey.Description</p>
+            <!-- Survey Description with Line Clamp -->
+            <p class="text-gray-600 mb-4 line-clamp-3">@survey.Description</p>
 
+            <!-- Buttons at the bottom, same line -->
             <div class="flex space-x-3 mt-4">
                 <a asp-action="Details" asp-route-id="@survey.SurveyId" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-300">
                     Details
@@ -46,3 +48,4 @@
         </div>
     }
 </div>
+
