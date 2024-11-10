@@ -5,7 +5,7 @@ namespace BullSurvey.Controllers
 {
     public class AboutUsController : Controller
     {
-        public IActionResult AboutUs()
+        public IActionResult Index()
         {
             var viewModel = new AboutUsViewModel
             {
