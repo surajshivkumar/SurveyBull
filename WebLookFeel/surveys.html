@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SurveyBull</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Inline styles for background and custom font -->
+    <style>
+      .home-background {
+        background-image: url("https://www.floridacareercenters.org/wp-content/uploads/2017/11/USF-MarshallCenter.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .bg-primary {
+        background-color: #006747; /* Tailwind's green shade */
+      }
+
+      .text-primary {
+        color: #006747; /* Tailwind's green shade */
+      }
+
+      .bg-gold {
+        background-color: rgb(237 235 210);
+      }
+
+      .section-title {
+        background-color: #cfc493; /* Ensure the section title background matches */
+        color: #006747;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .btn {
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #cfc493;
+        color: #006747;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans leading-relaxed text-gray-800">
+    <!-- Header Section -->
+    <header>
+      <nav class="bg-white border-b shadow-md">
+        <div
+          class="container mx-auto px-4 py-3 flex justify-between items-center"
+        >
+          <a
+            href="index.html"
+            class="text-primary font-bold text-xl flex items-center"
+          >
+            <img
+              src="favicon.ico"
+              class="w-6 h-6 mr-2"
+              style="width: 24px; height: 24px"
+            />
+            &nbsp;<span>SurveyBull</span>
+          </a>
+          <div>
+            <a href="index.html" class="text-gray-600 hover:text-primary mx-4"
+              >Home</a
+            >
+            <a href="surveys.html" class="text-gray-600 hover:text-primary mx-4"
+              >Surveys</a
+            >
+            <a
+              href="dashboard.html"
+              class="text-gray-600 hover:text-primary mx-4"
+              >Dashboard</a
+            >
+            <a href="about.html" class="text-gray-600 hover:text-primary mx-4"
+              >About Us</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+  </body>
+</html>
