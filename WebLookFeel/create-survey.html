@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Survey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Create Survey</h2>
+
+        <!-- Survey Form -->
+        <form id="survey-form" action="/surveys/create" method="post">
+            <!-- Title and Description -->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2">Title</label>
+                <input type="text" name="Title" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2">Description</label>
+                <textarea name="Description" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"></textarea>
+            </div>
+
+            <!-- Questions and Options -->
+            <h3 class="text-lg font-semibold mb-2">Questions</h3>
+            <div id="questions-container" class="mb-4"></div>
+            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4" onclick="addQuestion()">Add Question</button>
+
+            <!-- Submit Button -->
+            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Survey</button>
+        </form>
+    </div>
+
+    <!-- JavaScript for Adding Questions, Options, and Form Submission Alert -->
+    <script>
+        let questionCount = 0;
+
+        function addQuestion() {
+            questionCount++;
+            const questionContainer = document.createElement('div');
+            questionContainer.classList.add('mb-4');
+            questionContainer.innerHTML = `
+                <label class="block text-gray-700 font-bold mb-2">Question ${questionCount}</label>
+                <input type="text" name="Questions[${questionCount - 1}].Text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2" placeholder="Enter question text" />
+                <div id="options-container-${questionCount}" class="ml-4 mb-2"></div>
+                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mb-2" onclick="addOption(${questionCount - 1})">Add Option</button>
+                <hr class="mt-4" />
+            `;
+            document.getElementById('questions-container').appendChild(questionContainer);
+        }
+
+        function addOption(questionIndex) {
+            const optionsContainer = document.getElementById(`options-container-${questionIndex + 1}`);
+            const optionIndex = optionsContainer.children.length;
+            const optionContainer = document.createElement('div');
+            optionContainer.innerHTML = `
+                <input type="text" name="Questions[${questionIndex}].Options[${optionIndex}].Text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2" placeholder="Enter option text" />
+            `;
+            optionsContainer.appendChild(optionContainer);
+        }
+
+        // Handle form submission with an alert and redirect
+        document.getElementById('survey-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting immediately
+            alert('Survey Created Successfully');
+            // Redirect to surveys.html after the user clicks "OK"
+            window.location.href = 'surveys.html';
+        });
+    </script>
+</body>
+</html>

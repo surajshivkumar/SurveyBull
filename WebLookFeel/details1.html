@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Top Navigation with Back Button -->
+    <div class="max-w-3xl mx-auto flex justify-between items-center p-6 bg-white rounded-lg shadow-lg mt-10">
+        <!-- Survey Title -->
+        <h1 class="text-3xl font-semibold text-gray-800">Best Coffee @USF?</h1>
+        <!-- Back to Surveys Button -->
+        <a href="surveys.html" class="text-sm bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Back to Surveys</a>
+    </div>
+
+    <div class="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-4">
+        <p class="text-lg text-gray-600 mb-6">Poll to help us find the top spots on campus to grab the perfect cup of coffee.</p>
+
+        <!-- Survey Link -->
+        <div class="text-left mb-6">
+            <p class="text-green-600 font-semibold">This survey is published.</p>
+            <p>Survey Link: 
+                <a href="https://survey-bull.vercel.app/surveys/13" target="_blank" class="text-blue-500 hover:underline">
+                    https://survey-bull.vercel.app/surveys/13
+                </a>
+            </p>
+        </div>
+
+        <!-- Questions Section -->
+        <div class="mb-6">
+            <h3 class="text-2xl font-semibold text-gray-800 border-b-2 border-gray-300 pb-2">Questions</h3>
+        </div>
+
+        <!-- Questions List -->
+        <ul class="space-y-6">
+            <li class="p-6 bg-gray-100 rounded-lg shadow-sm">
+                <div class="text-xl font-semibold text-gray-900 mb-4">What's your favourite place to get coffee @USF?</div>
+                
+                <!-- Options List -->
+                <ul class="pl-5 list-disc text-gray-700">
+                    <li class="mt-1 text-gray-600">Bay Coffee</li>
+                    <li class="mt-1 text-gray-600">Starbucks</li>
+                    <li class="mt-1 text-gray-600">Buddy Brews</li>
+                    <li class="mt-1 text-gray-600">Kahwa Coffee</li>
+                </ul>
+            </li>
+            <li class="p-6 bg-gray-100 rounded-lg shadow-sm">
+                <div class="text-xl font-semibold text-gray-900 mb-4">Reason you like this establishment?</div>
+                
+                <!-- Options List -->
+                <ul class="pl-5 list-disc text-gray-700">
+                    <li class="mt-1 text-gray-600">Affordability</li>
+                    <li class="mt-1 text-gray-600">Taste</li>
+                    <li class="mt-1 text-gray-600">Proximity to class</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-6">
+        <p class="text-gray-500">&copy; 2024 SurveyBull - <a href="/Privacy" class="text-blue-500 hover:underline">Privacy</a></p>
+    </footer>
+
+</body>
+</html>
