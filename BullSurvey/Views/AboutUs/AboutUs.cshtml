@@ -1,30 +1,69 @@
-@model BullSurvey.Models.AboutUsViewModel
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@Model.WebsiteName - About Us Overview</title>
+    <title>About Us - @Model.WebsiteName</title>
+    <script>
+        // Function to toggle visibility with transitions
+        function toggleSection(section) {
+            const aboutUsSection = document.getElementById('aboutUs');
+            const dataModelSection = document.getElementById('dataModel');
+
+            if (section === 'aboutUs') {
+                aboutUsSection.classList.remove('hidden');
+                dataModelSection.classList.add('hidden');
+            } else if (section === 'dataModel') {
+                aboutUsSection.classList.add('hidden');
+                dataModelSection.classList.remove('hidden');
+            }
+        }
+    </script>
+    <style>
+        .fade {
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 font-sans leading-relaxed text-gray-800">
     <div class="container mx-auto px-4 py-8">
-        <!-- About Us Summary -->
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold mb-8 text-gray-800">@Model.WebsiteName - About Us</h1>
-            <p class="text-gray-600 mt-2 mb-6">@Model.Description</p>
-            <a href="/AboutUs/AboutUs" class="text-blue-600 underline hover:text-blue-800">Learn more about our team</a>
+        <!-- Header Section -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-green-600 mb-4">About Us</h1>
+            <p class="text-lg text-gray-500 mb-8">@Model.Description</p>
+            <div>
+                <button onclick="toggleSection('aboutUs')" class="text-lg text-white bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg transition duration-300 ease-in-out mx-2">About Us</button>
+                <button onclick="toggleSection('dataModel')" class="text-lg text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg transition duration-300 ease-in-out mx-2">Data Model</button>
+            </div>
         </div>
 
-        <!-- Team Members Flexbox Layout -->
-        <div class="flex gap-6 justify-center">
-            @foreach (var member in Model.TeamMembers.Take(4))
-            {
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-1/2 sm:w-1/3 lg:w-1/4">
-                    <img src="@member.PhotoUrl" alt="@member.Name's photo" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" />
-                    <h3 class="text-lg font-semibold text-green-500">@member.Name</h3>
-                    <p class="text-gray-600">@member.Role</p>
-                </div>
-            }
+        <!-- About Us Section -->
+        <div id="aboutUs" class="fade hidden">
+            <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                @foreach (var member in Model.TeamMembers)
+                {
+                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 text-center">
+                        <div class="rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="@member.PhotoUrl" alt="@member.Name's photo" class="w-32 h-32 object-cover" />
+                        </div>
+                        <h3 class="text-xl font-semibold text-green-600">@member.Name</h3>
+                        <p class="text-gray-600">@member.Role</p>
+                        <p class="mt-4 text-gray-700 text-sm">@member.Bio</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Data Model Section -->
+        <div id="dataModel" class="fade hidden">
+            <div class="text-center">
+                <a href="https://mermaid.ink/svg/pako:eNqNVMtugzAQ_BXL5-QHuEVKK0XpO1EPFReDt7CSsZHXpI3S9ttrggHFFDUcEN4d78yOzZ54biTwhINdoyisqFLN_LNr7AGO7OtruTQn9twAOTSaJSw32gnU1MGGRAA-1gFWihnEStMHWI-wkAMeIMBegGqjCSawS75LWcOmuFqQEdciUJA7kEvUqb4oeOpW7YPahehGsqftmCBnURdsj07BJLoGyi2eacdcZowCodmGnppMIZUgu-R3Tz-4Ewno4zMS4NONwR67P9bA2tdML7fbiDy4FFF30WuII6GT-sPxRAx9_G-OB1FN7b2pBKoxuhYO9liBby6r0PkjXbl_ur5GcLgokdwuGomN-riCZeLv7d_-dnSRsrWgMjPCyleEj3v_x6pY5d44oc52EPn6NGal8ZcPBrUv3rtJcnUAKwroMa23I-YOyf10Cn-Gzu5EBooikBcyIvpiNFOpJZmv0mZ3YBHIH7YIdvAFr8D6uyD9xDobkHJXghfLE_-psChdylPdAkXjzO6oc54428CCW9MUJU_ehSK_amrpfQgjr4eARGfsfTcQz3NxwWuh34ypwsbvX6acpdk"
+                   class="text-2xl text-blue-600 font-bold hover:underline" target="_blank" rel="noopener noreferrer">
+                    View Data Model
+                </a>
+            </div>
+            <div class="mt-8">
+                <img src="https://mermaid.ink/svg/pako:eNqNVMtugzAQ_BXL5-QHuEVKK0XpO1EPFReDt7CSsZHXpI3S9ttrggHFFDUcEN4d78yOzZ54biTwhINdoyisqFLN_LNr7AGO7OtruTQn9twAOTSaJSw32gnU1MGGRAA-1gFWihnEStMHWI-wkAMeIMBegGqjCSawS75LWcOmuFqQEdciUJA7kEvUqb4oeOpW7YPahehGsqftmCBnURdsj07BJLoGyi2eacdcZowCodmGnppMIZUgu-R3Tz-4Ewno4zMS4NONwR67P9bA2tdML7fbiDy4FFF30WuII6GT-sPxRAx9_G-OB1FN7b2pBKoxuhYO9liBby6r0PkjXbl_ur5GcLgokdwuGomN-riCZeLv7d_-dnSRsrWgMjPCyleEj3v_x6pY5d44oc52EPn6NGal8ZcPBrUv3rtJcnUAKwroMa23I-YOyf10Cn-Gzu5EBooikBcyIvpiNFOpJZmv0mZ3YBHIH7YIdvAFr8D6uyD9xDobkHJXghfLE_-psChdylPdAkXjzO6oc54428CCW9MUJU_ehSK_amrpfQgjr4eARGfsfTcQz3NxwWuh34ypwsbvX6acpdk" alt="Data Model Visualization" class="max-w-full h-auto rounded-lg">
+            </div>
         </div>
     </div>
 </body>

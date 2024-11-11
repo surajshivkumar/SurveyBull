@@ -1,43 +1,62 @@
-@model AboutUsViewModel
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>About Us - @Model.WebsiteName</title>
+    <script>
+        // Function to toggle visibility
+        function toggleSection(section) {
+            var aboutUsSection = document.getElementById('aboutUs');
+            var dataModelSection = document.getElementById('dataModel');
+
+            if (section === 'aboutUs') {
+                aboutUsSection.style.display = 'block';
+                dataModelSection.style.display = 'none';
+            } else if (section === 'dataModel') {
+                aboutUsSection.style.display = 'none';
+                dataModelSection.style.display = 'block';
+            }
+        }
+    </script>
 </head>
 <body class="bg-gray-50">
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold mb-8 text-primary bg-gold mb-2 text-center px-3 py-3">About Us</h1>
-            <p class="text-center text-gray-600">@Model.Description</p>
+            <h1 class="text-3xl font-bold mb-8 text-primary bg-gold mb-2 text-center px-3 py-3">About</h1>
+            <div class="text-center">
+                <button onclick="toggleSection('aboutUs')" class="text-2xl text-green-500 bg-green-50">
+                Team
+                </button>
+                <button onclick="toggleSection('dataModel')" class="text-2xl text-green-500 hover:underline mx-4">Data Model</button>
+            </div>
         </div>
 
-        <!-- Team Members Flexbox Layout -->
-        <div class="flex gap-6 justify-center">
-            @foreach (var member in Model.TeamMembers)
-            {
-                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full sm:w-1/3 lg:w-1/4">
-                    <div class="rounded-full overflow-hidden mx-auto mb-4">
-                        <img src="@member.PhotoUrl" alt="@member.Name's photo" class="w-full h-full object-cover" />
+        <!-- About Us Section -->
+        <div id="aboutUs" style="display: block;">
+            <h2 class="text-center text-gray-600">@Model.Description</h2>
+            <!-- Team Members Flexbox Layout -->
+            <div class="flex gap-6 justify-center">
+                @foreach (var member in Model.TeamMembers)
+                {
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full sm:w-1/3 lg:w-1/4">
+                        <div class="rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="@member.PhotoUrl" alt="@member.Name's photo" class="w-2 h-2 object-cover" />
+                        </div>
+                        <h3 class="text-xl font-bold text-green-500">@member.Name</h3>
+                        <p class="text-gray-600">@member.Role</p>
+                        <p class="mt-4 text-gray-700">@member.Bio</p>
                     </div>
-                    <h3 class="text-xl font-bold text-green-500">@member.Name</h3>
-                    <p class="text-gray-600">@member.Role</p>
-                    <p class="mt-4 text-gray-700">@member.Bio</p>
-                </div>
-            }
-
+                }
+            </div>
         </div>
-    </div>
-    <div class="text-center mt-4">
-        <a href="https://mermaid.ink/svg/pako:eNqNVMtugzAQ_BXL5-QHuEVKK0XpO1EPFReDt7CSsZHXpI3S9ttrggHFFDUcEN4d78yOzZ54biTwhINdoyisqFLN_LNr7AGO7OtruTQn9twAOTSaJSw32gnU1MGGRAA-1gFWihnEStMHWI-wkAMeIMBegGqjCSawS75LWcOmuFqQEdciUJA7kEvUqb4oeOpW7YPahehGsqftmCBnURdsj07BJLoGyi2eacdcZowCodmGnppMIZUgu-R3Tz-4Ewno4zMS4NONwR67P9bA2tdML7fbiDy4FFF30WuII6GT-sPxRAx9_G-OB1FN7b2pBKoxuhYO9liBby6r0PkjXbl_ur5GcLgokdwuGomN-riCZeLv7d_-dnSRsrWgMjPCyleEj3v_x6pY5d44oc52EPn6NGal8ZcPBrUv3rtJcnUAKwroMa23I-YOyf10Cn-Gzu5EBooikBcyIvpiNFOpJZmv0mZ3YBHIH7YIdvAFr8D6uyD9xDobkHJXghfLE_-psChdylPdAkXjzO6oc54428CCW9MUJU_ehSK_amrpfQgjr4eARGfsfTcQz3NxwWuh34ypwsbvX6acpdk"
-           class="text-3xl text-green-500 font-bold hover:underline" target="_blank" rel="noopener noreferrer">
-            Data Model
-        </a>
-    </div>
 
-    
+        <!-- Data Model Section -->
+        <div id="dataModel" style="display: none;" class="text-center mt-4">
+           
+            <img src="https://mermaid.ink/svg/pako:eNqNVMtugzAQ_BXL5-QHuEVKK0XpO1EPFReDt7CSsZHXpI3S9ttrggHFFDUcEN4d78yOzZ54biTwhINdoyisqFLN_LNr7AGO7OtruTQn9twAOTSaJSw32gnU1MGGRAA-1gFWihnEStMHWI-wkAMeIMBegGqjCSawS75LWcOmuFqQEdciUJA7kEvUqb4oeOpW7YPahehGsqftmCBnURdsj07BJLoGyi2eacdcZowCodmGnppMIZUgu-R3Tz-4Ewno4zMS4NONwR67P9bA2tdML7fbiDy4FFF30WuII6GT-sPxRAx9_G-OB1FN7b2pBKoxuhYO9liBby6r0PkjXbl_ur5GcLgokdwuGomN-riCZeLv7d_-dnSRsrWgMjPCyleEj3v_x6pY5d44oc52EPn6NGal8ZcPBrUv3rtJcnUAKwroMa23I-YOyf10Cn-Gzu5EBooikBcyIvpiNFOpJZmv0mZ3YBHIH7YIdvAFr8D6uyD9xDobkHJXghfLE_-psChdylPdAkXjzO6oc54428CCW9MUJU_ehSK_amrpfQgjr4eARGfsfTcQz3NxwWuh34ypwsbvX6acpdk" alt="">
+        </div>
 
+    </div>
 </body>
 </html>
