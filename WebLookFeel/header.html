@@ -1,0 +1,35 @@
+<nav class="bg-white border-b shadow-md">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="text-primary font-bold text-xl flex items-center">
+        <img src="favicon.ico" class="w-6 h-6 mr-2" style="width: 24px; height: 24px" />
+        &nbsp;<span>SurveyBull</span>
+      </a>
+      <div>
+        <a href="index.html" class="nav-link text-gray-600 hover:text-primary mx-4">Home</a>
+        <a href="surveys.html" class="nav-link text-gray-600 hover:text-primary mx-4">Surveys</a>
+        <a href="dashboard.html" class="nav-link text-gray-600 hover:text-primary mx-4">Dashboard</a>
+        <a href="about.html" class="nav-link text-gray-600 hover:text-primary mx-4">About Us</a>
+      </div>
+    </div>
+
+    <script>
+      console.log("Current Path:", window.location.pathname); // This should print the path on each page
+
+      const currentPath = window.location.pathname.split('/').pop();
+
+      // Get all navigation links
+      const navLinks = document.querySelectorAll('.nav-link');
+    
+      // Loop through the links and add 'active' class to the one matching the current path
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href').split('/').pop();
+        if (currentPath === linkPath) {
+          link.classList.add('text-primary', 'font-bold');
+        } else {
+          link.classList.remove('text-primary', 'font-bold');
+        }
+      });
+      
+    </script>
+  </nav>
+  

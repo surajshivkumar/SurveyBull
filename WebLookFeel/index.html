@@ -4,48 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SurveyBull</title>
+
+    <link rel="stylesheet" href="style.css"/>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Inline styles for background and custom font -->
-    <style>
-      .home-background {
-        background-image: url("https://www.floridacareercenters.org/wp-content/uploads/2017/11/USF-MarshallCenter.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-
-      .bg-primary {
-        background-color: #006747; /* Tailwind's green shade */
-      }
-
-      .text-primary {
-        color: #006747; /* Tailwind's green shade */
-      }
-
-      .bg-gold {
-        
-            background-color: rgb(237 235 210);
-        }
-
-      .section-title {
-        background-color: #cfc493; /* Ensure the section title background matches */
-        color: #006747;
-        padding: 10px;
-        text-align: center;
-        font-weight: bold;
-      }
-
-      .btn {
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      .btn:hover {
-        background-color: #cfc493;
-        color: #006747;
-      }
-    </style>
   </head>
   <body
     class="home-background bg-gray-50 font-sans leading-relaxed text-gray-800"
@@ -65,16 +28,10 @@
             &nbsp;<span>SurveyBull</span>
           </a>
           <div>
-            <a href="index.html" class="text-gray-600 hover:text-primary mx-4">Home</a>
-            <a href="surveys.html" class="text-gray-600 hover:text-primary mx-4"
-              >Surveys</a
-            >
-            <a href="dashboard.html" class="text-gray-600 hover:text-primary mx-4"
-              >Dashboard</a
-            >
-            <a href="about.html" class="text-gray-600 hover:text-primary mx-4"
-              >About Us</a
-            >
+            <a href="index.html" class="nav-link text-gray-600 hover:text-primary mx-4">Home</a>
+            <a href="surveys.html" class="nav-link text-gray-600 hover:text-primary mx-4">Surveys</a>
+            <a href="dashboard.html" class="nav-link text-gray-600 hover:text-primary mx-4">Dashboard</a>
+            <a href="about.html" class="nav-link text-gray-600 hover:text-primary mx-4">About Us</a>
           </div>
         </div>
       </nav>
@@ -99,7 +56,7 @@
           Create, share, and analyze surveys with ease!
         </p>
         <a
-          href="/Surveys"
+          href="surveys.html"
           class="btn bg-primary text-white font-semibold py-2 px-4 rounded mt-6 inline-block"
           >Get Started</a
         >
@@ -197,5 +154,33 @@
         </div>
       </div>
     </div>
+
+    <footer class="bg-gray-100 text-gray-500 py-4 mt-10">
+      <div class="container mx-auto text-center">
+          &copy; 2024 SurveyBull - <a href="/Privacy" class="text-primary hover:underline">Privacy</a>
+      </div>
+    </footer>
+
+    
+    <script>
+      console.log("Current Path:", window.location.pathname); // This should print the path on each page
+
+      const currentPath = window.location.pathname.split('/').pop();
+
+      // Get all navigation links
+      const navLinks = document.querySelectorAll('.nav-link');
+    
+      // Loop through the links and add 'active' class to the one matching the current path
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href').split('/').pop();
+        if (currentPath === linkPath) {
+          link.classList.add('text-primary', 'font-bold');
+        } else {
+          link.classList.remove('text-primary', 'font-bold');
+        }
+      });
+      
+    </script>
+
   </body>
 </html>
