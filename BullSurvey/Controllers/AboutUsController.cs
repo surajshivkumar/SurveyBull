@@ -17,29 +17,29 @@ namespace BullSurvey.Controllers
                     {
                         Name = "Suraj Shiva Kumar",
                         PhotoUrl = "/images/suraj.jpg",
-                        Role = "BAIS Student",
-                        Bio = "Suraj is a passionate leader with over three years of experience in backend development."
+                        Role = "Backend Developer",
+                        Bio = "Suraj developed the backend architecture, including setting up the database and integrating APIs."
                     },
                     new TeamMember
                     {
                         Name = "Shivani Suryawanshi",
                         PhotoUrl = "/images/shivani.jpeg",
-                        Role = "BAIS Student",
-                        Bio = "Shivani Suryawanshi has over two years of experience in technology solutions as a Software Engineer."
+                        Role = "Frontend Developer",
+                        Bio = "Shivani led frontend development, designing UI and layout for survey forms and dashboard."
                     },
                     new TeamMember
                     {
                         Name = "Sharvari More",
                         PhotoUrl = "/images/Sharvari.jpg",
-                        Role = "BAIS Student",
-                        Bio = "Sharvari has three years of experience in frontend development and customer engagement."
+                        Role = "Software Engineer",
+                        Bio = "Sharvari handled the integration of survey logic, and worked on form validations and session management."
                     },
                      new TeamMember
                     {
                         Name = "Venkata Sai Satvik Reddy Tanuboddi",
                         PhotoUrl = "/images/satvik.jpg",
-                        Role = "BAIS Student",
-                        Bio = "Satvik is a data-driven professional with two years of experience as a Data Analyst."
+                        Role = "Data Analyst",
+                        Bio = "Satvik contributed to data analysis by parsing survey data and deriving insights to enhance survey process."
                     }
                 }
             };
