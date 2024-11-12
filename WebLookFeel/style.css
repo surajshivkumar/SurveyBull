@@ -567,6 +567,44 @@
       overflow: hidden;
       text-overflow: ellipsis;
   }
+
+  .commit-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .commits-section {
+    margin-top: 20px;
+  }
+  
+  .commit-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 10px;
+  }
+  
+  .commit-card {
+    flex: 1 1 calc(50% - 16px); /* Wrap after 2 cards */
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+  }
+  
+  .commit-card:hover {
+    background-color: #f1f5f9;
+    transform: translateY(-3px);
+    transition: 0.3s ease;
+  }
   
   nav a {
     position: relative;
