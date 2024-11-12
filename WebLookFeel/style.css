@@ -545,6 +545,12 @@
     font-weight: bold;
   }
 
+  /* Apply a specific height to all images in the team cards */
+.team-card img {
+  height: 20rem;
+}
+
+
   .btn {
     transition: background-color 0.3s, color 0.3s;
   }

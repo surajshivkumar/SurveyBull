@@ -4,38 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SurveyBull - Dashboard</title>
-
     <link rel="stylesheet" href="style.css" />
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-      /* Hamburger icon styles (hidden by default on large screens) */
-      .hamburger {
-        display: none;
+      .home-background {
+        background-image: url("https://www.floridacareercenters.org/wp-content/uploads/2017/11/USF-MarshallCenter.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
       }
-
+      /* Mobile menu styles */
       @media screen and (max-width: 768px) {
-        /* Show the hamburger icon on smaller screens */
         .hamburger {
           display: block;
         }
-
-        /* Hide the navigation links by default on smaller screens */
         .nav-links {
           display: none;
-        }
-
-        /* Display the nav links when the hamburger is clicked */
-        .nav-links.active {
-          display: block;
-          background-color: #ffffff;
-          position: absolute;
-          top: 50px;
-          right: 0;
-          left: 0;
-          padding: 10px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
       }
     </style>
@@ -46,20 +32,18 @@
       <nav class="bg-white border-b shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
           <a href="index.html" class="text-primary font-bold text-xl flex items-center">
-            <img src="favicon.ico" class="w-6 h-6 mr-2" style="width: 24px; height: 24px" />
-            &nbsp;<span>SurveyBull</span>
+            <img src="favicon.ico" class="w-6 h-6 mr-2" />
+            <span>SurveyBull</span>
           </a>
 
           <!-- Hamburger Icon (Visible on mobile screens) -->
-          <div class="hamburger lg:hidden" onclick="toggleMenu()">
-            <button id="hamburger-btn" class="text-primary">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 12h18M3 6h18M3 18h18"></path>
-              </svg>
-            </button>
-          </div>
+          <button id="hamburger-btn" class="hamburger lg:hidden text-primary" onclick="toggleMenu()">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h18M3 6h18M3 18h18"></path>
+            </svg>
+          </button>
 
-          <!-- Menu Links (Visible on large screens) -->
+          <!-- Desktop Menu Links -->
           <div class="nav-links lg:flex space-x-4 hidden">
             <a href="index.html" class="nav-link text-gray-600 hover:text-primary">Home</a>
             <a href="surveys.html" class="nav-link text-gray-600 hover:text-primary">Surveys</a>
@@ -68,7 +52,7 @@
           </div>
         </div>
 
-        <!-- Mobile Menu (Hidden by default) -->
+        <!-- Mobile Menu Links -->
         <div id="mobile-menu" class="lg:hidden hidden bg-white border-t shadow-md">
           <div class="px-4 py-3">
             <a href="index.html" class="block py-2 text-gray-600 hover:text-primary">Home</a>
@@ -108,17 +92,14 @@
     <script>
       // Toggle mobile menu visibility
       function toggleMenu() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenu.classList.toggle('hidden');
-        navLinks.classList.toggle('active');
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenu.classList.toggle("hidden");
       }
 
       // Highlight the active page link
       const currentPath = window.location.pathname.split('/').pop();
       const navLinks = document.querySelectorAll('.nav-link');
-    
+
       navLinks.forEach(link => {
         const linkPath = link.getAttribute('href').split('/').pop();
         if (currentPath === linkPath) {

@@ -12,99 +12,64 @@
       function toggleSection(section) {
         var aboutUsSection = document.getElementById("aboutUs");
         var dataModelSection = document.getElementById("dataModel");
+        var githubSection = document.getElementById("github");
 
         var teamButton = document.getElementById("teamButton");
         var dataModelButton = document.getElementById("dataModelButton");
+        var githubButton = document.getElementById("githubButton");
 
-        // Remove 'active-team' class from both buttons
-        teamButton.classList.remove('active-team');
-        dataModelButton.classList.remove('active-team');
+        // Remove active class from all buttons
+        teamButton.classList.remove("active-team");
+        dataModelButton.classList.remove("active-team");
+        githubButton.classList.remove("active-team");
 
-        // Show the appropriate section based on the button clicked
+        // Hide all sections first
+        aboutUsSection.style.display = "none";
+        dataModelSection.style.display = "none";
+        githubSection.style.display = "none";
+
+        // Toggle the selected section
         if (section === "aboutUs") {
           aboutUsSection.style.display = "block";
-          dataModelSection.style.display = "none";
-          teamButton.classList.add("active-team"); // Add active class to "Team"
+          teamButton.classList.add("active-team");
         } else if (section === "dataModel") {
-          aboutUsSection.style.display = "none";
           dataModelSection.style.display = "block";
-          dataModelButton.classList.add("active-team"); // Add active class to "Data Model"
+          dataModelButton.classList.add("active-team");
+        } else if (section === "github") {
+          githubSection.style.display = "block";
+          githubButton.classList.add("active-team");
         }
       }
 
-      // Function to highlight active navbar link based on the current page
-      document.addEventListener('DOMContentLoaded', function () {
-        const currentPath = window.location.pathname.split('/').pop();
-        const navLinks = document.querySelectorAll('.nav-link');
+      // Toggle mobile menu visibility
+      function toggleMenu() {
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenu.classList.toggle("hidden");
+      }
 
-        navLinks.forEach(link => {
-          const linkPath = link.getAttribute('href').split('/').pop();
+      // Highlight the active page link
+      document.addEventListener("DOMContentLoaded", function () {
+        const currentPath = window.location.pathname.split("/").pop();
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        navLinks.forEach((link) => {
+          const linkPath = link.getAttribute("href").split("/").pop();
           if (currentPath === linkPath) {
-            link.classList.add('text-primary', 'font-bold');
+            link.classList.add("text-primary", "font-bold");
           } else {
-            link.classList.remove('text-primary', 'font-bold');
+            link.classList.remove("text-primary", "font-bold");
           }
         });
       });
     </script>
     <style>
       /* Custom Media Queries for Responsiveness */
-      @media screen and (max-width: 640px) {
-        .container {
-          padding-left: 1rem;
-          padding-right: 1rem;
+      @media screen and (max-width: 768px) {
+        .hamburger {
+          display: block;
         }
-
-        nav a {
-          margin: 0.5rem 0;
-        }
-
-        .team-container {
-          flex-direction: column;
-          gap: 2rem;
-        }
-
-        .text-2xl {
-          font-size: 1.5rem;
-        }
-
-        img {
-          width: 100%;
-        }
-      }
-
-      @media screen and (min-width: 641px) and (max-width: 1024px) {
-        .container {
-          padding-left: 2rem;
-          padding-right: 2rem;
-        }
-
-        .text-2xl {
-          font-size: 1.75rem;
-        }
-
-        .team-container {
-          flex-direction: row;
-          gap: 1.5rem;
-        }
-
-        .team-card {
-          width: 45%;
-        }
-      }
-
-      @media screen and (min-width: 1025px) {
-        .container {
-          padding-left: 3rem;
-          padding-right: 3rem;
-        }
-
-        .team-card {
-          width: 22%;
-        }
-
-        .text-2xl {
-          font-size: 2rem;
+        .nav-links {
+          display: none;
         }
       }
     </style>
@@ -118,11 +83,30 @@
             <img src="favicon.ico" class="w-6 h-6 mr-2" style="width: 24px; height: 24px" />
             &nbsp;<span>SurveyBull</span>
           </a>
-          <div>
-            <a href="index.html" class="nav-link text-gray-600 hover:text-primary mx-4">Home</a>
-            <a href="surveys.html" class="nav-link text-gray-600 hover:text-primary mx-4">Surveys</a>
-            <a href="dashboard.html" class="nav-link text-gray-600 hover:text-primary mx-4">Dashboard</a>
-            <a href="about.html" class="nav-link text-gray-600 hover:text-primary mx-4">About Us</a>
+
+          <!-- Hamburger Icon (Visible on mobile screens) -->
+          <button id="hamburger-btn" class="hamburger lg:hidden text-primary" onclick="toggleMenu()">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h18M3 6h18M3 18h18"></path>
+            </svg>
+          </button>
+
+          <!-- Desktop Menu Links -->
+          <div class="nav-links lg:flex space-x-4 hidden">
+            <a href="index.html" class="nav-link text-gray-600 hover:text-primary">Home</a>
+            <a href="surveys.html" class="nav-link text-gray-600 hover:text-primary">Surveys</a>
+            <a href="dashboard.html" class="nav-link text-gray-600 hover:text-primary">Dashboard</a>
+            <a href="about.html" class="nav-link text-gray-600 hover:text-primary">About Us</a>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Links -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t shadow-md">
+          <div class="px-4 py-3">
+            <a href="index.html" class="block py-2 text-gray-600 hover:text-primary">Home</a>
+            <a href="surveys.html" class="block py-2 text-gray-600 hover:text-primary">Surveys</a>
+            <a href="dashboard.html" class="block py-2 text-gray-600 hover:text-primary">Dashboard</a>
+            <a href="about.html" class="block py-2 text-gray-600 hover:text-primary">About Us</a>
           </div>
         </div>
       </nav>
@@ -132,9 +116,10 @@
     <div class="container mx-auto px-4 py-8">
       <div class="mb-8">
         <h1 class="text-3xl font-bold mb-8 text-primary bg-gold mb-2 text-center px-3 py-3">About</h1>
-        <div class="text-center">
+        <div class="text-center justify-between">
           <button id="teamButton" onclick="toggleSection('aboutUs')" class="text-2xl text-green-500 hover-gold bg-green-50">Team</button>
           <button id="dataModelButton" onclick="toggleSection('dataModel')" class="text-2xl text-green-500 hover-gold mx-4">Data Model</button>
+          <button id="githubButton" onclick="toggleSection('github')" class="text-2xl text-green-500 hover-gold mx-4">GitHub</button>
         </div>
       </div>
 
@@ -143,49 +128,86 @@
         <h2 class="text-center text-gray-600">
           SurveyBull is a leading platform for creating and managing surveys.
         </h2>
-        <div class="team-container flex gap-6 justify-center">
-          <!-- Team Members -->
-          <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center">
-            <img src="images/about/suraj.jpg" alt="Suraj Shiva Kumar's photo" class="w-full h-half object-cover mb-4" />
-            <h3 class="text-xl font-bold text-green-500">Suraj Shiva Kumar</h3>
-            <p class="text-gray-600">BAIS Student</p>
-            <p class="mt-4 text-gray-700">
-              Suraj is a passionate leader with over three years of experience in backend development.
-            </p>
-          </div>
+        <!-- Team Members Flexbox Layout -->
+        <!-- Example of using Tailwind classes to set fixed width -->
+<div class="team-container flex flex-col md:flex-row gap-6 justify-center">
+  <!-- Member 1 -->
+  <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full max-w-xs">
+    <div class="overflow-hidden mx-auto mb-4">
+      <img
+        src="images/about/suraj.jpg"
+        alt="Suraj Shiva Kumar's photo"
+        class="w-full h-half object-cover"
+      />
+    </div>
+    <h3 class="text-xl font-bold text-green-500">Suraj Shiva Kumar</h3>
+    <p class="text-gray-600">Backend Developer</p>
+    <p class="mt-4 text-gray-700">
+      Suraj developed the backend architecture, including setting up the database and integrating APIs.
+    </p>
+  </div>
 
-          <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center">
-            <img src="images/about/shivani.jpeg" alt="Shivani Suryawanshi's photo" class="w-full h-half object-cover mb-4" />
-            <h3 class="text-xl font-bold text-green-500">Shivani Suryawanshi</h3>
-            <p class="text-gray-600">BAIS Student</p>
-            <p class="mt-4 text-gray-700">
-              Shivani has over two years of experience in technology solutions as a Software Engineer.
-            </p>
-          </div>
+  <!-- Member 2 -->
+  <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full max-w-xs">
+    <div class="overflow-hidden mx-auto mb-4">
+      <img
+        src="images/about/shivani.jpeg"
+        alt="Shivani Suryawanshi's photo"
+        class="w-full h-half object-cover"
+      />
+    </div>
+    <h3 class="text-xl font-bold text-green-500">Shivani Suryawanshi</h3>
+    <p class="text-gray-600">Frontend Developer</p>
+    <p class="mt-4 text-gray-700">
+      Shivani led frontend development, designing UI and layout for survey forms and dashboard.
+    </p>
+  </div>
 
-          <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center">
-            <img src="images/about/sharvari.jpg" alt="Sharvari More's photo" class="w-full h-half object-cover mb-4" />
-            <h3 class="text-xl font-bold text-green-500">Sharvari More</h3>
-            <p class="text-gray-600">BAIS Student</p>
-            <p class="mt-4 text-gray-700">
-              Sharvari has three years of experience in frontend development and customer engagement.
-            </p>
-          </div>
+  <!-- Member 3 -->
+  <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full max-w-xs">
+    <div class="overflow-hidden mx-auto mb-4">
+      <img
+        src="images/about/Sharvari.jpg"
+        alt="Sharvari More's photo"
+        class="w-full h-half object-cover"
+      />
+    </div>
+    <h3 class="text-xl font-bold text-green-500">Sharvari More</h3>
+    <p class="text-gray-600">Software Engineer</p>
+    <p class="mt-4 text-gray-700">
+      Sharvari handled the integration of survey logic, and worked on form validations and session management.
+    </p>
+  </div>
 
-          <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center">
-            <img src="images/about/satvik.jpg" alt="Venkata Sai Satvik Reddy Tanuboddi's photo" class="w-full h-half object-cover mb-4" />
-            <h3 class="text-xl font-bold text-green-500">Venkata Sai Satvik Reddy Tanuboddi</h3>
-            <p class="text-gray-600">BAIS Student</p>
-            <p class="mt-4 text-gray-700">
-              Satvik is a data-driven professional with two years of experience as a Data Analyst.
-            </p>
-          </div>
-        </div>
+  <!-- Member 4 -->
+  <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full max-w-xs">
+    <div class="overflow-hidden mx-auto mb-4">
+      <img
+        src="images/about/satvik.jpg"
+        alt="Venkata Sai Satvik Reddy Tanuboddi's photo"
+        class="w-full h-half object-cover"
+      />
+    </div>
+    <h3 class="text-xl font-bold text-green-500">Venkata Sai Satvik Reddy Tanuboddi</h3>
+    <p class="text-gray-600">Data Analyst</p>
+    <p class="mt-4 text-gray-700">
+      Satvik contributed to data analysis by parsing survey data and deriving insights to enhance survey process.
+    </p>
+  </div>
+</div>
+
       </div>
 
       <!-- Data Model Section -->
       <div id="dataModel" style="display: none" class="text-center mt-4">
-        <img src="https://mermaid.ink/svg/pako:eNqNVMtugzAQ_BXL5-QHuEVKK0XpO1EPFReDt7CSsZHXpI3S9ttrggHFFDUcEN4d78yOzZ54biTwhINdoyisqFLN_LNr7AGO7OtruTQn9twAOTSa8J29NO3MNWw6aS5muGOgxeOkeYsOVts4kDQ_GKh3v0aTEnrAYnIbzVJZjo_3p47lfYXXt2REpm8Qh-v4zM1n0B7i52IlXjZMuP0i32Yw8Vfo1F2DZvK2dknFwdR5fsfv_GqkVxq8ow0wQtZA2kA1Ow_JUDoUexagv9sMwr7Nhk7PbqpVpo76Kph9rxnaJmr2vhD9R2oEEzpaVdQ==">
+        <img src="https://mermaid.ink/svg/pako:eNqNVMtugzAQ_BXL5-QHuEVKK0XpO1EPFReDt7CSsZHXpI3S9ttrggHFFDUcEN4d78yOzZ54biTwhINdoyisqFLN_LNr7AGO7OtruTQn9twAOTSaJSw32gnU1MGGRAA-1gFWihnEStMHWI-wkAMeIMBegGqjCSawS75LWcOmuFqQEdciUJA7kEvUqb4oeOpW7YPahehGsqftmCBnURdsj07BJLoGyi2eacdcZowCodmGnppMIZUgu-R3Tz-4Ewno4zMS4NONwR67P9bA2tdML7fbiDy4FFF30WuII6GT-sPxRAx9_G-OB1FN7b2pBKoxuhYO9liBby6r0PkjXbl_ur5GcLgokdwuGomN-riCZeLv7d_-dnSRsrWgMjPCyleEj3v_x6pY5d44oc52EPn6NGal8ZcPBrUv3rtJcnUAKwroMa23I-YOyf10Cn-Gzu5EBooikBcyIvpiNFOpJZmv0mZ3YBHIH7YIdvAFr8D6uyD9xDobkHJXghfLE_-psChdylPdAkXjzO6oc54428CCW9MUJU_ehSK_amrpfQgjr4eARGfsfTcQz3NxwWuh34ypwsbvX6acpdk" alt="ER Diagram" class="mx-auto mt-6"/>
+      </div>
+
+      <!-- GitHub Section -->
+      <div id="github" style="display: none" class="text-center mt-4">
+        <h2 class="text-2xl font-bold text-gray-700">Check our GitHub Repository</h2>
+        <p class="mt-2 text-gray-600">Visit our repository for more details about the project.</p>
+        <a href="https://github.com/surajshivkumar/SurveyBull/tree/feature-branch" class="text-blue-500 underline mt-4" target="_blank">GitHub Repository</a>
       </div>
     </div>
   </body>
