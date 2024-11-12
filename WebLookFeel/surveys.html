@@ -1,236 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SurveyBull</title>
-
-    <link rel="stylesheet" href="style.css"/>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Inline styles for background and custom font -->
-    <!-- <style>
-      .home-background {
-        background-image: url("https://www.floridacareercenters.org/wp-content/uploads/2017/11/USF-MarshallCenter.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-
-      .bg-primary {
-        background-color: #006747; /* Tailwind's green shade */
-      }
-
-      .text-primary {
-        color: #006747; /* Tailwind's green shade */
-      }
-
-      .bg-gold {
-        background-color: rgb(237, 235, 210);
-      }
-
-      .section-title {
-        background-color: #cfc493; /* Ensure the section title background matches */
-        color: #006747;
-        padding: 10px;
-        text-align: center;
-        font-weight: bold;
-      }
-
-      .btn {
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      .btn:hover {
-        background-color: #cfc493;
-        color: #006747;
-      }
-    </style> -->
-  </head>
-  <body class="bg-gray-50 font-sans leading-relaxed text-gray-800">
-    <!-- Header Section -->
-    <header>
-      <nav class="bg-white border-b shadow-md">
-        <div
-          class="container mx-auto px-4 py-3 flex justify-between items-center"
-        >
-          <a
-            href="index.html"
-            class="text-primary font-bold text-xl flex items-center"
-          >
-            <img
-              src="favicon.ico"
-              class="w-6 h-6 mr-2"
-              style="width: 24px; height: 24px"
-            />
-            &nbsp;<span>SurveyBull</span>
-          </a>
-          <div>
-            <a href="index.html" class="nav-link text-gray-600 hover:text-primary mx-4">Home</a>
-            <a href="surveys.html" class="nav-link text-gray-600 hover:text-primary mx-4">Surveys</a>
-            <a href="dashboard.html" class="nav-link text-gray-600 hover:text-primary mx-4">Dashboard</a>
-            <a href="about.html" class="nav-link text-gray-600 hover:text-primary mx-4">About Us</a>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <!-- Surveys Section -->
-    <main class="container mx-auto px-4 py-8">
-      <h1
-        class="text-2xl font-bold mb-8 text-center text-primary bg-gold px-3 py-3"
-      >
-        Surveys
-      </h1>
-
-      <!-- Create New Survey Button -->
-      <div class="mb-8 text-right">
-        <a
-          href="create-survey.html"
-          class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300"
-        >
-          Create New Survey
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surveys - SurveyBull</title>
+  <link rel="stylesheet" href="style.css"/>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans leading-relaxed text-gray-800">
+  <!-- Header Section -->
+  <header>
+    <nav class="bg-white border-b shadow-md">
+      <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <a href="index.html" class="text-primary font-bold text-xl flex items-center">
+          <img src="favicon.ico" class="w-6 h-6 mr-2" style="width: 24px; height: 24px" />
+          &nbsp;<span>SurveyBull</span>
         </a>
-      </div>
-
-      <!-- Surveys Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Survey Card 1 -->
-        <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-3xl font-semibold text-gray-800">
-              Best Coffee @USF?
-            </h2>
-            <a
-              href="publish.html"
-              class="bg-primary hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded shadow-md transition duration-300"
-            >
-              <span>Publish</span>
-            </a>
-          </div>
-          <p class="text-gray-600 mb-4">
-            Poll to help us find the top spots on campus to grab the perfect cup
-            of coffee.
-          </p>
-          <div class="flex space-x-3 mt-4">
-            <a
-              href="details1.html"
-              class="bg-cobaltblue hover:bg-cobaltblue text-white font-semibold py-2 px-4 rounded transition duration-300"
-              >Details</a
-            >
-            <a
-              href="edit1.html"
-              class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-300"
-              >Edit</a
-            >
-            <a
-              href="delete.html"
-              class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition duration-300"
-              >Delete</a
-            >
-          </div>
+        <div class="block lg:hidden">
+          <button id="hamburger-btn" class="text-primary">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h18M3 6h18M3 18h18"></path>
+            </svg>
+          </button>
         </div>
-
-        <!-- Survey Card 2 -->
-        <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-3xl font-semibold text-gray-800">
-              Bull Spirit Quiz
-            </h2>
-            <a
-              href="publish.html"
-              class="bg-primary hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded shadow-md transition duration-300"
-            >
-              <span>Publish</span>
-            </a>
-          </div>
-          <p class="text-gray-600 mb-4">
-            Show your USF spirit! Answer these questions to find out how much
-            you know about our school!
-          </p>
-          <div class="flex space-x-3 mt-4">
-            <a
-              href="details2.html"
-              class="bg-cobaltblue hover:bg-cobaltblue text-white font-semibold py-2 px-4 rounded transition duration-300"
-              >Details</a
-            >
-            <a
-              href="edit2.html"
-              class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-300"
-              >Edit</a
-            >
-            <a
-              href="delete.html"
-              class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition duration-300"
-              >Delete</a
-            >
-          </div>
-        </div>
-
-        <!-- Survey Card 3 -->
-        <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-3xl font-semibold text-gray-800">
-              Who is the GOAT?
-            </h2>
-            <a
-              href="publish.html"
-              class="bg-primary hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded shadow-md transition duration-300"
-            >
-              <span>Publish</span>
-            </a>
-          </div>
-          <p class="text-gray-600 mb-4">
-            Survey to decide the greatest of all time. Cast your vote and let
-            your voice be heard!
-          </p>
-          <div class="flex space-x-3 mt-4">
-            <a
-              href="details3.html"
-              class="bg-cobaltblue hover:bg-cobaltblue text-white font-semibold py-2 px-4 rounded transition duration-300"
-              >Details</a
-            >
-            <a
-              href="edit3.html"
-              class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-300"
-              >Edit</a
-            >
-            <a
-              href="delete.html"
-              class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition duration-300"
-              >Delete</a
-            >
-          </div>
+        <div class="hidden lg:flex space-x-4">
+          <a href="index.html" class="nav-link text-gray-600 hover:text-primary">Home</a>
+          <a href="surveys.html" class="nav-link text-gray-600 hover:text-primary">Surveys</a>
+          <a href="dashboard.html" class="nav-link text-gray-600 hover:text-primary">Dashboard</a>
+          <a href="about.html" class="nav-link text-gray-600 hover:text-primary">About Us</a>
         </div>
       </div>
-    </main>
-    <!-- Hero Section -->
-
-    <footer class="bg-gray-100 text-gray-500 py-4 mt-10">
-      <div class="container mx-auto text-center">
-          &copy; 2024 SurveyBull - <a href="/Privacy" class="text-primary hover:underline">Privacy</a>
+      <div id="mobile-menu" class="lg:hidden hidden bg-white border-t shadow-md">
+        <div class="px-4 py-3">
+          <a href="index.html" class="block py-2 text-gray-600 hover:text-primary">Home</a>
+          <a href="surveys.html" class="block py-2 text-gray-600 hover:text-primary">Surveys</a>
+          <a href="dashboard.html" class="block py-2 text-gray-600 hover:text-primary">Dashboard</a>
+          <a href="about.html" class="block py-2 text-gray-600 hover:text-primary">About Us</a>
+        </div>
       </div>
-    </footer>
+    </nav>
+  </header>
 
-    <script>
-      console.log("Current Path:", window.location.pathname); // This should print the path on each page
+  <!-- Surveys Section -->
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-8 text-center text-primary bg-gold px-3 py-3">
+      Surveys
+    </h1>
+    <div class="mb-8 text-right">
+      <a href="create-survey.html" class="bg-primary hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300">
+        Create New Survey
+      </a>
+    </div>
 
-      const currentPath = window.location.pathname.split('/').pop();
+    <!-- Surveys Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Survey Card 1 -->
+      <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl md:text-3xl font-semibold text-gray-800">
+            Best Coffee @USF?
+          </h2>
+          <a href="publish.html" class="bg-primary hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded shadow-md transition duration-300">
+            Publish
+          </a>
+        </div>
+        <p class="text-gray-600 mb-4">
+          Poll to help us find the top spots on campus to grab the perfect cup of coffee.
+        </p>
+        <div class="flex space-x-3 mt-4">
+          <a href="details1.html" class="bg-cobaltblue hover:bg-cobaltblue text-white font-semibold py-2 px-4 rounded transition duration-300">Details</a>
+          <a href="edit1.html" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-300">Edit</a>
+          <a href="delete.html" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition duration-300">Delete</a>
+        </div>
+      </div>
 
-      // Get all navigation links
-      const navLinks = document.querySelectorAll('.nav-link');
-    
-      // Loop through the links and add 'active' class to the one matching the current path
-      navLinks.forEach(link => {
-        const linkPath = link.getAttribute('href').split('/').pop();
-        if (currentPath === linkPath) {
-          link.classList.add('text-primary', 'font-bold');
-        } else {
-          link.classList.remove('text-primary', 'font-bold');
-        }
-      });
-      
-    </script>
-  </body>
+      <!-- Survey Card 2 -->
+      <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl md:text-3xl font-semibold text-gray-800">
+            Bull Spirit Quiz
+          </h2>
+          <a href="publish.html" class="bg-primary hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded shadow-md transition duration-300">
+            Publish
+          </a>
+        </div>
+        <p class="text-gray-600 mb-4">
+          Show your USF spirit! Answer these questions to find out how much you know about our school!
+        </p>
+        <div class="flex space-x-3 mt-4">
+          <a href="details2.html" class="bg-cobaltblue hover:bg-cobaltblue text-white font-semibold py-2 px-4 rounded transition duration-300">Details</a>
+          <a href="edit2.html" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-300">Edit</a>
+          <a href="delete.html" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition duration-300">Delete</a>
+        </div>
+      </div>
+
+      <!-- Survey Card 3 -->
+      <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl md:text-3xl font-semibold text-gray-800">
+            Who is the GOAT?
+          </h2>
+          <a href="publish.html" class="bg-primary hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded shadow-md transition duration-300">
+            Publish
+          </a>
+        </div>
+        <p class="text-gray-600 mb-4">
+          Survey to decide the greatest of all time. Cast your vote and let your voice be heard!
+        </p>
+        <div class="flex space-x-3 mt-4">
+          <a href="details3.html" class="bg-cobaltblue hover:bg-cobaltblue text-white font-semibold py-2 px-4 rounded transition duration-300">Details</a>
+          <a href="edit3.html" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-300">Edit</a>
+          <a href="delete.html" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition duration-300">Delete</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 text-gray-500 py-4 mt-10">
+    <div class="container mx-auto text-center">
+      &copy; 2024 SurveyBull - <a href="/Privacy" class="text-primary hover:underline">Privacy</a>
+    </div>
+  </footer>
+
+  <!-- Mobile Menu Script -->
+  <script>
+    document.getElementById("hamburger-btn").addEventListener("click", function() {
+      const menu = document.getElementById("mobile-menu");
+      menu.classList.toggle("hidden");
+    });
+
+    const currentPath = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      const linkPath = link.getAttribute('href').split('/').pop();
+      if (currentPath === linkPath) {
+        link.classList.add('text-primary', 'font-bold');
+      } else {
+        link.classList.remove('text-primary', 'font-bold');
+      }
+    });
+  </script>
+</body>
 </html>
