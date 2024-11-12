@@ -6,13 +6,13 @@
     <title>@ViewData["Title"] - SurveyBull</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-    <!-- Link to the font-awesome tab -->
-   <link rel="stylesheet" href="https://fontawesome.com/icons">
+    <!-- Correct Link to Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Link to the favicon for the browser tab -->
     <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
 
-    <!-- Inline CSS for home page background -->
+    <!-- Inline CSS for home page background and responsive nav -->
     <style>
         .home-background {
             background-image: url('https://www.floridacareercenters.org/wp-content/uploads/2017/11/USF-MarshallCenter.jpg');
@@ -20,19 +20,56 @@
             background-position: center;
             background-repeat: no-repeat;
         }
+
+        /* Desktop styles */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Mobile styles */
+        @@media screen and (max-width: 1023px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: white;
+                padding: 1rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-menu.show {
+                display: flex;
+            }
+
+            .nav-menu a {
+                padding: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
-    
 </head>
 <body class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "home-background" : "")">
     <header>
-        <nav class="bg-white border-b shadow-md">
+        <nav class="bg-white border-b shadow-md relative">
             <div class="container mx-auto px-4 py-3 flex justify-between items-center">
                 <a href="/" class="text-primary font-bold text-xl flex items-center">
-                    
                     <img src="~/favicon.ico" class="w-6 h-6 mr-2" style="width: 24px; height: 24px;" />
                     &nbsp;<span>SurveyBull</span>
                 </a>
-                <div>
+                
+                <!-- Mobile Menu Toggle Button -->
+                <button id="menu-toggle" class="hidden lg:hidden text-gray-600 hover:text-primary focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Navigation Links -->
+                <div id="menu" class="nav-menu">
                     <a href="/" class="text-gray-600 hover:text-primary mx-4 @(Context.Request.Path.Value == "/" ? "text-primary font-bold" : "")">Home</a>
                     <a href="/Surveys" class="text-gray-600 hover:text-primary mx-4 @(Context.Request.Path.Value.Contains("/Surveys") ? "text-primary font-bold" : "")">Surveys</a>
                     <a href="/Dashboard" class="text-gray-600 hover:text-primary mx-4 @(Context.Request.Path.Value.Contains("/Dashboard") ? "text-primary font-bold" : "")">Dashboard</a>
@@ -50,10 +87,38 @@
 
     <footer class="bg-gray-100 text-gray-500 py-4 mt-10">
         <div class="container mx-auto text-center">
-            &copy; 2024 SurveyBull - <a href="/Privacy" class="text-primary hover:underline">Privacy</a>
+            &copy; 2024 SurveyBull
         </div>
     </footer>
 
     @RenderSection("Scripts", required: false)
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById("menu-toggle");
+        const menu = document.getElementById("menu");
+        
+        // Show hamburger menu only on mobile
+        function updateMenuVisibility() {
+            if (window.innerWidth < 1024) { // lg breakpoint
+                menuToggle.classList.remove('hidden');
+                menu.classList.remove('show'); // Hide menu when switching to mobile
+            } else {
+                menuToggle.classList.add('hidden');
+                menu.classList.add('show'); // Always show menu on desktop
+            }
+        }
+
+        // Initial check
+        updateMenuVisibility();
+
+        // Update on window resize
+        window.addEventListener('resize', updateMenuVisibility);
+
+        // Toggle menu on mobile
+        menuToggle.addEventListener("click", function() {
+            menu.classList.toggle("show");
+        });
+    </script>
 </body>
 </html>
