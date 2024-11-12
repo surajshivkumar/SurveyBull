@@ -110,6 +110,15 @@
 
     @section Scripts {
     <script>
+        @{
+            var numQuestions = Model.QuestionAnalytics.Count();
+            var responsesArray = new string[numQuestions];
+            for (int i = 0; i < numQuestions; i++)
+            {
+                responsesArray[i] = Model.TotalResponses.ToString();
+            }
+            var responsesJson = string.Join(",", responsesArray);
+            }
         // Helper function to generate gradient
         function createGradient(ctx, color1, color2) {
             const gradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -129,7 +138,7 @@
                 labels: @Json.Serialize(Model.QuestionAnalytics.Select(q => $"Q{q.QuestionId}")),
                 datasets: [{
                     label: 'Responses',
-                    data: [@Model.TotalResponses,@Model.TotalResponses],
+                    data: [@Html.Raw(responsesJson)],
                     backgroundColor: barGradient,
                     borderColor: 'rgb(59, 130, 246)',
                     borderWidth: 1,
