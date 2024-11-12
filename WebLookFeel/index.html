@@ -5,172 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SurveyBull</title>
 
-    <link rel="stylesheet" href="style.css"/>
-
+    <link rel="stylesheet" href="style.css" />
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      /* Hamburger icon styles (hidden by default on large screens) */
+      .hamburger {
+        display: none;
+      }
+
+      @media screen and (max-width: 768px) {
+        /* Show the hamburger icon on smaller screens */
+        .hamburger {
+          display: block;
+        }
+
+        /* Hide the navigation links by default on smaller screens */
+        .nav-links {
+          display: none;
+        }
+
+        /* Display the nav links when the hamburger is clicked */
+        .nav-links.active {
+          display: block;
+          background-color: #ffffff;
+          position: absolute;
+          top: 50px;
+          right: 0;
+          left: 0;
+          padding: 10px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+      }
+    </style>
   </head>
-  <body
-    class="home-background bg-gray-50 font-sans leading-relaxed text-gray-800"
-  >
+  <body class="bg-gray-50 font-sans leading-relaxed text-gray-800">
     <!-- Header Section -->
     <header>
       <nav class="bg-white border-b shadow-md">
-        <div
-          class="container mx-auto px-4 py-3 flex justify-between items-center"
-        >
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
           <a href="index.html" class="text-primary font-bold text-xl flex items-center">
-            <img
-              src="favicon.ico"
-              class="w-6 h-6 mr-2"
-              style="width: 24px; height: 24px"
-            />
+            <img src="favicon.ico" class="w-6 h-6 mr-2" style="width: 24px; height: 24px" />
             &nbsp;<span>SurveyBull</span>
           </a>
-          <div>
-            <a href="index.html" class="nav-link text-gray-600 hover:text-primary mx-4">Home</a>
-            <a href="surveys.html" class="nav-link text-gray-600 hover:text-primary mx-4">Surveys</a>
-            <a href="dashboard.html" class="nav-link text-gray-600 hover:text-primary mx-4">Dashboard</a>
-            <a href="about.html" class="nav-link text-gray-600 hover:text-primary mx-4">About Us</a>
+
+          <!-- Hamburger Icon (Visible on mobile screens) -->
+          <div class="hamburger lg:hidden" onclick="toggleMenu()">
+            <button id="hamburger-btn" class="text-primary">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12h18M3 6h18M3 18h18"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Menu Links (Visible on large screens) -->
+          <div class="nav-links lg:flex space-x-4 hidden">
+            <a href="index.html" class="nav-link text-gray-600 hover:text-primary">Home</a>
+            <a href="surveys.html" class="nav-link text-gray-600 hover:text-primary">Surveys</a>
+            <a href="dashboard.html" class="nav-link text-gray-600 hover:text-primary">Dashboard</a>
+            <a href="about.html" class="nav-link text-gray-600 hover:text-primary">About Us</a>
+          </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t shadow-md">
+          <div class="px-4 py-3">
+            <a href="index.html" class="block py-2 text-gray-600 hover:text-primary">Home</a>
+            <a href="surveys.html" class="block py-2 text-gray-600 hover:text-primary">Surveys</a>
+            <a href="dashboard.html" class="block py-2 text-gray-600 hover:text-primary">Dashboard</a>
+            <a href="about.html" class="block py-2 text-gray-600 hover:text-primary">About Us</a>
           </div>
         </div>
       </nav>
     </header>
 
-    <!-- Hero Section -->
-    <div class="bg-gold text-primary text-center py-20 mr-20 ml-20 mt-10">
-      <div class="container mx-auto">
-        <div class="flex justify-center items-center mb-4">
-          <!-- Optional SVG Icon -->
-  
-            <path
-              d="M165,23.16c0-3.25,3-13.11,3-13.11s-18.31,10.78-18.31,23c0,8.55,5.41,13.64,5.41,15.77,0,2.55-11.07,7.64-44.19,7.64L86.74,96.53l-8.26,5.3-10,18.89H49.71l11.4-18.52-2.73-5.79L85.8,55.29c-42.86,0-48.43-5.15-48.43-6C37.37,46.86,56,38.36,56,23.94c0-6.69-6.62-14.73-6.62-14.73C46.22,37.2,3.93,30.52,3.93,62.29c0,13,15.83,18.58,31.45,19.69l-5.32,8c-2,3-.43,6.38,2.05,11.38l-10.5,16.85s-4.84,3.48-5.89,5.51c-2.19,4.29,2.34,10.7,9.54,22.5H76.45c17.21-9.73,24.3-13.73,24.3-17.79l-.29-4.24,9.84-17.2c2.57-1.17,8.9-4.37,11.57-8.71l9-14.63c25.7-.48,52.63-10.78,52.63-32.82C183.49,35.93,165,34,165,23.16"
-              style="fill: #fff"
-            ></path>
-          </svg>
-        </div>
+    <h1 class="text-3xl mt-9 ml-20 mr-20 font-bold mb-8 text-center text-primary bg-gold px-3 py-3">
+      Survey Responses Dashboard
+    </h1>
 
-        <h1 class="text-4xl font-bold">Welcome to SurveyBull</h1>
-        <p class="text-lg mt-4">
-          Your go-to survey tool for the University of South Florida community.
-          Create, share, and analyze surveys with ease!
-        </p>
-        <a
-          href="surveys.html"
-          class="btn bg-primary text-white font-semibold py-2 px-4 rounded mt-6 inline-block"
-          >Get Started</a
-        >
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ml-20">
+      <div class="card border border-green-300 shadow-lg rounded-lg p-1 hover:shadow-xl transition-shadow duration-300 cursor-pointer" onclick="location.href='chart1.html'">
+        <h2 class="font-semibold text-lg text-primary mt-2 mb-2 ml-2 cursor-pointer">Best Coffee @USF?</h2>
+        <p class="text-gray-700 cursor-pointer mt-2 mb-2 ml-2">Responses: 15</p>
+      </div>
+      <div class="card border border-green-300 shadow-lg rounded-lg p-1 hover:shadow-xl transition-shadow duration-300 cursor-pointer" onclick="location.href='chart2.html'">
+        <h2 class="font-semibold text-lg text-primary mt-2 mb-2 ml-2 cursor-pointer">Bull Spirit Quiz</h2>
+        <p class="text-gray-700 cursor-pointer mt-2 mb-2 ml-2">Responses: 12</p>
       </div>
     </div>
 
-    <!-- Features Section -->
-    <div class="container mx-auto mt-10">
-      <!-- Title with background -->
-      
-      <div class="flex flex-wrap justify-center gap-8">
-        <!-- Card 1: Easy to Use -->
-        <div class="bg-gold text-primary shadow-lg rounded-lg p-6 w-80 text-center">
-          <div class="flex justify-center mb-4">
-            <!-- SVG Icon -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-12 w-12 text-primary"
-            >
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-semibold">Easy to Use</h3>
-          <p class="mt-4 text-gray-600">
-            An intuitive and user-friendly interface to create and participate
-            in surveys seamlessly.
-          </p>
-        </div>
-
-        <!-- Card 2: Real-time Insights -->
-        <div class="bg-gold text-primary shadow-lg rounded-lg p-6 w-80 text-center">
-          <div class="flex justify-center mb-4">
-            <!-- SVG Icon -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-12 w-12 text-primary"
-            >
-              <line x1="18" y1="20" x2="18" y2="10"></line>
-              <line x1="12" y1="20" x2="12" y2="4"></line>
-              <line x1="6" y1="20" x2="6" y2="14"></line>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-semibold">Real-time Insights</h3>
-          <p class="mt-4 text-gray-600">
-            Access real-time data with easy-to-use dashboards, helping you make
-            informed decisions faster.
-          </p>
-        </div>
-
-        <!-- Card 3: Secure & Private -->
-        <div class="bg-gold text-primary shadow-lg rounded-lg p-6 w-80 text-center">
-          <div class="flex justify-center mb-4">
-            <!-- SVG Icon -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-12 w-12 text-primary"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path
-                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-semibold">Secure & Private</h3>
-          <p class="mt-4 text-gray-600">
-            All data is securely stored and accessible only by authorized
-            personnel to protect your privacy.
-          </p>
-        </div>
-      </div>
-    </div>
-
+    <!-- Footer Section -->
     <footer class="bg-gray-100 text-gray-500 py-4 mt-10">
       <div class="container mx-auto text-center">
-          &copy; 2024 SurveyBull - <a href="/Privacy" class="text-primary hover:underline">Privacy</a>
+        &copy; 2024 SurveyBull
       </div>
     </footer>
 
-    
     <script>
-      console.log("Current Path:", window.location.pathname); // This should print the path on each page
+      // Toggle mobile menu visibility
+      function toggleMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.classList.toggle('hidden');
+        navLinks.classList.toggle('active');
+      }
+
+      // Highlight the active page link
+      console.log("Current Path:", window.location.pathname);
 
       const currentPath = window.location.pathname.split('/').pop();
-
-      // Get all navigation links
       const navLinks = document.querySelectorAll('.nav-link');
     
-      // Loop through the links and add 'active' class to the one matching the current path
       navLinks.forEach(link => {
         const linkPath = link.getAttribute('href').split('/').pop();
         if (currentPath === linkPath) {
@@ -179,8 +126,6 @@
           link.classList.remove('text-primary', 'font-bold');
         }
       });
-      
     </script>
-
   </body>
 </html>

@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css" />
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script>
       // Function to toggle visibility and active class for buttons
       function toggleSection(section) {
@@ -25,11 +24,11 @@
         if (section === "aboutUs") {
           aboutUsSection.style.display = "block";
           dataModelSection.style.display = "none";
-          teamButton.classList.add('active-team');  // Add active class to "Team"
+          teamButton.classList.add("active-team"); // Add active class to "Team"
         } else if (section === "dataModel") {
           aboutUsSection.style.display = "none";
           dataModelSection.style.display = "block";
-          dataModelButton.classList.add('active-team');  // Add active class to "Data Model"
+          dataModelButton.classList.add("active-team"); // Add active class to "Data Model"
         }
       }
 
@@ -144,27 +143,13 @@
       </nav>
     </header>
 
-    <div id="header"></div>
     <!-- Hero Section -->
     <div class="container mx-auto px-4 py-8">
-      <!-- Header -->
       <div class="mb-8">
         <h1 class="text-3xl font-bold mb-8 text-primary bg-gold mb-2 text-center px-3 py-3">About</h1>
         <div class="text-center">
-          <button
-            id="teamButton"
-            onclick="toggleSection('aboutUs')"
-            class="text-2xl text-green-500 hover-gold bg-green-50"
-          >
-            Team
-          </button>
-          <button
-            id="dataModelButton"
-            onclick="toggleSection('dataModel')"
-            class="text-2xl text-green-500 hover-gold mx-4"
-          >
-            Data Model
-          </button>
+          <button id="teamButton" onclick="toggleSection('aboutUs')" class="text-2xl text-green-500 hover-gold bg-green-50">Team</button>
+          <button id="dataModelButton" onclick="toggleSection('dataModel')" class="text-2xl text-green-500 hover-gold mx-4">Data Model</button>
         </div>
       </div>
 
@@ -243,17 +228,8 @@
 
       <!-- Data Model Section -->
       <div id="dataModel" style="display: none" class="text-center mt-4">
-        <img
-          src="https://mermaid.ink/svg/pako:eNqNVMtugzAQ_BXL5-QHuEVKK0XpO1EPFReDt7CSsZHXpI3S9ttrggHFFDUcEN4d78yOzZ54biTwhINdoyisqFLN_LNr7AGO7OtruTQn9twAOTSaJSw32gnU1MGGRAA-1gFWihnEStMHWI-wkAMeIMBegGqjCSawS75LWcOmuFqQEdciUJA7kEvUqb4oeOpW7YPahehGsqftmCBnURdsj07BJLoGyi2eacdcZowCodmGnppMIZUgu-R3Tz-4Ewno4zMS4NONwR67P9bA2tdML7fbiDy4FFF30WuII6GT-sPxRAx9_G-OB1FN7b2pBKoxuhYO9liBby6r0PkjXbl_ur5GcLgokdwuGomN-riCZeLv7d_-dnSRsrWgMjPCyleEj3v_x6pY5d44oc52EPn6NGal8ZcPBrUv3rtJcnUAKwroMa23I-YOyf10Cn-Gzu5EBooikBcyIvpiNFOpJZmv0mZ3YBHIH7YIdvAFr8D6uyD9xDobkHJXghfLE_-psChdylPdAkXjzO6oc54428CCW9MUJU_ehSK_amrpfQgjr4eARGfsfTcQz3NxwWuh34ypwsbvX6acpdk"
-          alt="Data Model Diagram"
-        />
+        <img src="https://mermaid.ink/svg/pako:eNqNVMtugzAQ_BXL5-QHuEVKK0XpO1EPFReDt7CSsZHXpI3S9ttrggHFFDUcEN4d78yOzZ54biTwhINdoyisqFLN_LNr7AGO7OtruTQn9twAOTSa8J29NO3MNWw6aS5muGOgxeOkeYsOVts4kDQ_GKh3v0aTEnrAYnIbzVJZjo_3p47lfYXXt2REpm8Qh-v4zM1n0B7i52IlXjZMuP0i32Yw8Vfo1F2DZvK2dknFwdR5fsfv_GqkVxq8ow0wQtZA2kA1Ow_JUDoUexagv9sMwr7Nhk7PbqpVpo76Kph9rxnaJmr2vhD9R2oEEzpaVdQ==">
       </div>
     </div>
-
-    <footer class="bg-gray-100 text-gray-500 py-4 mt-10">
-      <div class="container mx-auto text-center">
-        &copy; 2024 SurveyBull - <a href="/Privacy" class="text-primary hover:underline">Privacy</a>
-      </div>
-    </footer>
   </body>
 </html>
