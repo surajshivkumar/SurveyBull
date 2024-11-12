@@ -175,7 +175,7 @@
       </div>
 
       <!-- Question Analytics Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
         <!-- Sample question analytics -->
         <div
           class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
@@ -220,7 +220,21 @@
             </div>
           </div>
         </div>
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-4">Response Distribution</h2>
+          <div class="h-96">
+            <canvas id="myDoughnutChart"></canvas>
+          </div>
+        </div>
       </div>
+      
+        <!-- Doughnut Chart -->
+        
+       
+      </div>
+
+    </div>
+
     </div>
 
     <script>
@@ -317,6 +331,43 @@
           interaction: {
             intersect: false,
             mode: "index",
+          },
+        },
+      });
+
+      const ctxDoughnut = document.getElementById("myDoughnutChart").getContext("2d");
+
+      new Chart(ctxDoughnut, {
+        type: "doughnut",
+        data: {
+          labels: ["Question 1 ", "Question 2","Question 3","Question 4"], // Survey question answers
+          datasets: [
+            {
+              data: [20, 30,10,40], // Dummy data representing the response percentages
+              backgroundColor: ["#36a2eb", "#ff6384","#987778","#123442"],
+              borderColor: "white",
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "bottom",
+            },
+            datalabels: {
+              color: "white",
+              font: {
+                weight: "bold",
+              },
+              formatter: function (value, context) {
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percentage = ((value / total) * 100).toFixed(1);
+                return percentage + "%";
+              },
+            },
           },
         },
       });
