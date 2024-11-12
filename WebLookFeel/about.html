@@ -48,6 +48,82 @@
         });
       });
     </script>
+
+    <style>
+      /* Custom Media Queries for Responsiveness */
+      
+      /* For small screens like mobile */
+      @media screen and (max-width: 640px) {
+        .container {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        /* Navbar links */
+        nav a {
+          margin: 0.5rem 0;
+        }
+
+        /* About Us Section */
+        .team-container {
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        /* Buttons */
+        .text-2xl {
+          font-size: 1.5rem;
+        }
+
+        /* Data Model Section */
+        img {
+          width: 100%;
+        }
+      }
+
+      /* For larger tablets and above */
+      @media screen and (min-width: 641px) and (max-width: 1024px) {
+        .container {
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+
+        /* Adjust button font size */
+        .text-2xl {
+          font-size: 1.75rem;
+        }
+
+        /* Adjust team container for medium screens */
+        .team-container {
+          flex-direction: row;
+          gap: 1.5rem;
+        }
+
+        /* Team Cards */
+        .team-card {
+          width: 45%;
+        }
+      }
+
+      /* For large screens like desktops */
+      @media screen and (min-width: 1025px) {
+        /* Adjust the padding */
+        .container {
+          padding-left: 3rem;
+          padding-right: 3rem;
+        }
+
+        /* Team Cards for larger screens */
+        .team-card {
+          width: 22%;
+        }
+
+        /* Buttons */
+        .text-2xl {
+          font-size: 2rem;
+        }
+      }
+    </style>
   </head>
   <body class="bg-gray-50 font-sans leading-relaxed text-gray-800">
     <!-- Header Section -->
@@ -98,9 +174,9 @@
           SurveyBull is a leading platform for creating and managing surveys.
         </h2>
         <!-- Team Members Flexbox Layout -->
-        <div class="flex gap-6 justify-center">
+        <div class="team-container flex gap-6 justify-center">
           <!-- Member 1 -->
-          <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full sm:w-1/3 lg:w-1/4">
+          <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center">
             <div class="overflow-hidden mx-auto mb-4">
               <img
                 src="images/about/suraj.jpg"
@@ -116,7 +192,7 @@
           </div>
 
           <!-- Member 2 -->
-          <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full sm:w-1/3 lg:w-1/4">
+          <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center">
             <div class="overflow-hidden mx-auto mb-4">
               <img
                 src="images/about/shivani.jpeg"
@@ -132,7 +208,7 @@
           </div>
 
           <!-- Member 3 -->
-          <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full sm:w-1/3 lg:w-1/4">
+          <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center">
             <div class="overflow-hidden mx-auto mb-4">
               <img
                 src="images/about/Sharvari.jpg"
@@ -148,7 +224,7 @@
           </div>
 
           <!-- Member 4 -->
-          <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full sm:w-1/3 lg:w-1/4">
+          <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center">
             <div class="overflow-hidden mx-auto mb-4">
               <img
                 src="images/about/satvik.jpg"
