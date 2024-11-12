@@ -72,7 +72,7 @@
 
         <!-- Charts Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <!-- Response Distribution Chart -->
+            <!-- Response Distribution Bar Chart -->
             <div class="bg-white rounded-xl shadow-md p-6">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Response Distribution</h2>
                 <div class="h-96">
@@ -89,33 +89,19 @@
             </div>
         </div>
 
-        <!-- Question Analytics Grid -->
+        <!-- Question Analytics Doughnut Charts Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @foreach (var question in Model.QuestionAnalytics)
             {
                 <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800">Question @question.QuestionId</h3>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
-                            @question.Count responses
+                        <h3 class="text-lg font-semibold text-gray-800">@Model.Survey.Questions.FirstOrDefault(q => q.QuestionId == question.QuestionId)?.Text</h3>
+                        <span class="px-3 py-1 bg-green-100 rounded-full text-md text-primary ">
+                            @Model.TotalResponses  Responses
                         </span>
                     </div>
-                    <div class="space-y-3">
-                        @foreach (var option in question.Options)
-                        {
-                            <div class="bg-gray-50 p-3 rounded-lg">
-                                <div class="flex justify-between items-center mb-1">
-                                    <span class="text-gray-700">@option.TextAnswer</span>
-                                    <span class="text-sm text-gray-500">Option @option.OptionId</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: @(((double)option.Count / question.Count * 100).ToString("F1"))%"></div>
-                                </div>
-                                <div class="text-right mt-1">
-                                    <span class="text-sm text-gray-600">@(((double)option.Count / question.Count * 100).ToString("F1"))%</span>
-                                </div>
-                            </div>
-                        }
+                    <div class="h-64">
+                        <canvas id="doughnutChart@(question.QuestionId)"></canvas>
                     </div>
                 </div>
             }
@@ -132,17 +118,18 @@
             return gradient;
         }
 
-        // Bar Chart
+        // Bar Chart for Response Distribution
         const ctxBar = document.getElementById('myBarChart').getContext('2d');
         const barGradient = createGradient(ctxBar, 'rgba(59, 130, 246, 0.5)', 'rgba(59, 130, 246, 0.1)');
         
         new Chart(ctxBar, {
             type: 'bar',
             data: {
+
                 labels: @Json.Serialize(Model.QuestionAnalytics.Select(q => $"Q{q.QuestionId}")),
                 datasets: [{
                     label: 'Responses',
-                    data: @Json.Serialize(Model.QuestionAnalytics.Select(q => q.Count)),
+                    data: [@Model.TotalResponses,@Model.TotalResponses],
                     backgroundColor: barGradient,
                     borderColor: 'rgb(59, 130, 246)',
                     borderWidth: 1,
@@ -180,14 +167,14 @@
             }
         });
 
-        // Time Series Chart
+        // Time Series Chart for Responses Over Time
         const ctxTime = document.getElementById('myTimeSeriesChart').getContext('2d');
         const lineGradient = createGradient(ctxTime, 'rgba(16, 185, 129, 0.2)', 'rgba(16, 185, 129, 0)');
         
         new Chart(ctxTime, {
             type: 'line',
             data: {
-                labels: @Json.Serialize(Model.TimeSeries.Select(ts => ts.Date.ToString("MMM dd"))),
+                labels: @Html.Raw(Json.Serialize(Model.TimeSeries.Select(ts => ts.Date.ToString("yyyy-MM-dd")))),  // Format the Date here
                 datasets: [{
                     label: 'Responses',
                     data: @Json.Serialize(Model.TimeSeries.Select(ts => ts.Count)),
@@ -230,6 +217,60 @@
                 }
             }
         });
+        
+        // Doughnut charts for each question
+        const colorPalette = [
+            'rgba(16, 185, 129, 0.8)',  // Green
+            'rgba(59, 130, 246, 0.8)',  // Blue
+            'rgba(249, 115, 22, 0.8)',  // Orange
+            'rgba(236, 72, 153, 0.8)',  // Pink
+            'rgba(139, 92, 246, 0.8)',  // Purple
+            'rgba(245, 158, 11, 0.8)',  // Yellow
+        ];
+
+        @foreach (var question in Model.QuestionAnalytics)
+        {
+            <text>
+            new Chart(document.getElementById('doughnutChart@(question.QuestionId)').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: @Json.Serialize(question.Answers.Select(a => a.TextAnswer)),
+                    datasets: [{
+                        data: @Json.Serialize(question.Answers.Select(a => a.Count)),
+                        backgroundColor: colorPalette.slice(0, @question.Answers.Count()),
+                        borderWidth: 2,
+                        borderColor: 'white'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        datalabels: {
+                            color: 'white',
+                            font: {
+                                weight: 'bold'
+                            },
+                            formatter: function(value, context) {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return percentage + '%';
+                            }
+                        }
+                    },
+                    cutout: '60%'  // Hole to make the chart a doughnut
+                }
+            });
+            </text>
+        }
     </script>
     }
 </body>

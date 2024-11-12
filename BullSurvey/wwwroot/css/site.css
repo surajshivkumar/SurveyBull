@@ -518,6 +518,32 @@ Make sure disabled buttons don't get the pointer cursor.
   cursor: default;
 }
 
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+nav a {
+  position: relative;
+  padding-bottom: 4px; /* Adds space for the line */
+  transition: color 0.3s ease;
+}
+
+    /* Hover effect to show line below each link */
+nav a:hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0; /* Aligns the line at the bottom */
+  left: 0;
+  width: 100%;
+  height: 2px; /* Line thickness */
+  background-color: #CFC493; /* Replace with your primary color */
+}
+
+
 /*
 1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
 2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
@@ -726,6 +752,10 @@ video {
   width: 100%;
 }
 
+.h-full{
+    height: 326px;
+}
+
 .max-w-2xl {
   max-width: 42rem;
 }
@@ -860,6 +890,10 @@ video {
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
+.bg-cobaltblue {
+    background-color: #0147AB;
+}
+
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
@@ -903,6 +937,14 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-black {
+    background-color: black;
+}
+
+.bg-gold {
+    background-color: #EDEBD1;
 }
 
 .p-4 {
@@ -960,6 +1002,9 @@ video {
 .text-center {
   text-align: center;
 }
+.text-justify {
+    text-align: justify-all;
+}
 
 .text-right {
   text-align: right;
@@ -1015,6 +1060,15 @@ video {
   text-transform: lowercase;
 }
 
+.text-blue-500 {
+    --tw-text-opacity: 1;
+    color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-green-500 {
+    color: #006747;
+}
+
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1033,6 +1087,10 @@ video {
 .text-gray-800 {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
+.text-black {
+    color: black;
 }
 
 .text-primary {
@@ -1068,10 +1126,18 @@ video {
 }
 
 .shadow-lg {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+
+    .shadow-lg:hover {
+        --tw-shadow: 0 15px 25px -3px rgb(0 0 0 / 0.2), 0 8px 10px -4px rgb(0 0 0 / 0.15);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+        transform: translateY(-10px); /* Slight lift effect */
+        background-color: #EDEBD1;
+    }
 
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);

@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BullSurvey.Models; // Adjust based on your namespace
+using BullSurvey.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
+[Route("Dashboard")]
 public class DashBoardController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -13,81 +14,73 @@ public class DashBoardController : Controller
         _context = context;
     }
 
-    // GET: Dashboard/{id}
+    // GET: /Dashboard (Lists all surveys)
+    [HttpGet("")]
     public async Task<IActionResult> Index()
     {
         var surveys = await _context.Surveys.ToListAsync();
-        return View(surveys); // Ensure you're returning the correct model
+        return View(surveys);
     }
-// GET: Dashboard/{id}
+
+    // GET: /Dashboard/Dashboard/{id} (Displays the specific dashboard for a survey)
+    [HttpGet("Dashboard/{id}")]
     public async Task<IActionResult> Dashboard(int id)
     {
         var survey = await _context.Surveys
-            .Include(s => s.Questions)
-                .ThenInclude(q => q.Options)
+            .Include(s => s.Questions) // Include related questions
+            .ThenInclude(q => q.Options) // Include options for each question
             .FirstOrDefaultAsync(s => s.SurveyId == id);
 
         if (survey == null)
         {
-            return NotFound();
+            return NotFound(); // Return 404 if survey not found
         }
 
-        // Prepare analytics data
-        var totalResponses = await _context.Responses.CountAsync(r => r.SurveyId == id);
-        var questionAnalytics = await _context.Responses
-            .Where(r => r.SurveyId == id)
-            .SelectMany(r => r.Answers)
-            .GroupBy(a => a.QuestionId)
-            .Select(g => new
-            {
-                QuestionId = g.Key,
-                Count = g.Count(),
-                Options = g.Select(a => new { a.OptionId, a.TextAnswer }).ToList()
-            })
-            .ToListAsync();
-
-        // Prepare a time series for responses over time
+        // Prepare the time series data for responses over time
         var timeSeries = await _context.Responses
             .Where(r => r.SurveyId == id)
-            .GroupBy(r => r.SubmittedAt.Date)
+            .GroupBy(r => r.SubmittedAt.Date) // Group responses by the date part of SubmittedAt
             .Select(g => new
             {
-                Date = g.Key,
+                Date = g.Key,   // Get the date
+                Count = g.Count() // Count how many responses for each date
+            })
+            .OrderBy(ts => ts.Date)  // Order by Date ascending
+            .ToListAsync();
+
+        // Prepare question analytics (answers distribution for each question)
+        var questionAnalytics = await _context.Answers
+            .Where(a => a.Question.SurveyId == id)
+            .GroupBy(a => new { a.QuestionId, a.TextAnswer })
+            .Select(g => new
+            {
+                QuestionId = g.Key.QuestionId,
+                TextAnswer = g.Key.TextAnswer,
                 Count = g.Count()
             })
             .ToListAsync();
 
-        // Pass the data to the view
-        var analyticsData = new
+        // Create the ViewModel for passing data to the view
+        var viewModel = new SurveyDashboardViewModel
         {
             Survey = survey,
-            TotalResponses = totalResponses,
-            QuestionAnalytics = questionAnalytics,
-            TimeSeries = timeSeries
-        };
-        var viewModel = new SurveyDashboardViewModel
-    {
-        Survey = survey, // Your survey object
-        TotalResponses = totalResponses,
-        ResponseRate = 100, // Implement this method based on your logic
-        QuestionAnalytics = questionAnalytics.Select(qa => new QuestionAnalyticViewModel
-        {
-            QuestionId = qa.QuestionId,
-            Count = qa.Count,
-            Options = qa.Options.Select(o => new QuestionOptionViewModel
+            TotalResponses = await _context.Responses.CountAsync(r => r.SurveyId == id),
+            ResponseRate = 100, // Modify based on your logic to calculate response rate
+            TimeSeries = timeSeries.Select(ts => new TimeSeriesDataPoint
             {
-                OptionId = o.OptionId,
-                TextAnswer = o.TextAnswer,
-                Count = _context.Answers.Count(a => a.QuestionId == qa.QuestionId && a.OptionId == o.OptionId)  // Make sure to include the count for each option
+                Date = ts.Date,
+                Count = ts.Count
+            }).ToList(),
+            QuestionAnalytics = questionAnalytics.GroupBy(q => q.QuestionId).Select(group => new QuestionAnalyticViewModel
+            {
+                QuestionId = group.Key,
+                Answers = group.Select(g => new AnswerViewModel
+                {
+                    TextAnswer = g.TextAnswer,
+                    Count = g.Count
+                }).ToList()
             }).ToList()
-        }).ToList(),
-        TimeSeries = timeSeries.Select(ts => new TimeSeriesDataPoint
-        {
-            Date = ts.Date,
-            Count = ts.Count
-        }).ToList()
-    };
-
+        };
 
         return View(viewModel);
     }

@@ -29,4 +29,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\NewFolder\" />
+    <Folder Include="Views\Shared\NewFolder\" />
+  </ItemGroup>
 </Project>

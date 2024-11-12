@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SurveyBull</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Function to toggle visibility and active class for buttons
+      function toggleSection(section) {
+        var aboutUsSection = document.getElementById("aboutUs");
+        var dataModelSection = document.getElementById("dataModel");
+        var githubSection = document.getElementById("github");
+
+        var teamButton = document.getElementById("teamButton");
+        var dataModelButton = document.getElementById("dataModelButton");
+        var githubButton = document.getElementById("githubButton");
+
+        // Remove active class from all buttons
+        teamButton.classList.remove("active-team");
+        dataModelButton.classList.remove("active-team");
+        githubButton.classList.remove("active-team");
+
+        // Hide all sections first
+        aboutUsSection.style.display = "none";
+        dataModelSection.style.display = "none";
+        githubSection.style.display = "none";
+
+        // Toggle the selected section
+        if (section === "aboutUs") {
+          aboutUsSection.style.display = "block";
+          teamButton.classList.add("active-team");
+        } else if (section === "dataModel") {
+          dataModelSection.style.display = "block";
+          dataModelButton.classList.add("active-team");
+        } else if (section === "github") {
+          githubSection.style.display = "block";
+          githubButton.classList.add("active-team");
+        }
+      }
+
+      // Toggle mobile menu visibility
+      function toggleMenu() {
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenu.classList.toggle("hidden");
+      }
+
+      // Highlight the active page link
+      document.addEventListener("DOMContentLoaded", function () {
+        const currentPath = window.location.pathname.split("/").pop();
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        navLinks.forEach((link) => {
+          const linkPath = link.getAttribute("href").split("/").pop();
+          if (currentPath === linkPath) {
+            link.classList.add("text-primary", "font-bold");
+          } else {
+            link.classList.remove("text-primary", "font-bold");
+          }
+        });
+      });
+    </script>
+    <style>
+      /* Custom Media Queries for Responsiveness */
+      @media screen and (max-width: 768px) {
+        .hamburger {
+          display: block;
+        }
+        .nav-links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans leading-relaxed text-gray-800">
+    <!-- Header Section -->
+    <header>
+      <nav class="bg-white border-b shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+          <a href="index.html" class="text-primary font-bold text-xl flex items-center">
+            <img src="favicon.ico" class="w-6 h-6 mr-2" style="width: 24px; height: 24px" />
+            &nbsp;<span>SurveyBull</span>
+          </a>
+
+          <!-- Hamburger Icon (Visible on mobile screens) -->
+          <button id="hamburger-btn" class="hamburger lg:hidden text-primary" onclick="toggleMenu()">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h18M3 6h18M3 18h18"></path>
+            </svg>
+          </button>
+
+          <!-- Desktop Menu Links -->
+          <div class="nav-links lg:flex space-x-4 hidden">
+            <a href="index.html" class="nav-link text-gray-600 hover:text-primary">Home</a>
+            <a href="surveys.html" class="nav-link text-gray-600 hover:text-primary">Surveys</a>
+            <a href="dashboard.html" class="nav-link text-gray-600 hover:text-primary">Dashboard</a>
+            <a href="about.html" class="nav-link text-gray-600 hover:text-primary">About Us</a>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Links -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t shadow-md">
+          <div class="px-4 py-3">
+            <a href="index.html" class="block py-2 text-gray-600 hover:text-primary">Home</a>
+            <a href="surveys.html" class="block py-2 text-gray-600 hover:text-primary">Surveys</a>
+            <a href="dashboard.html" class="block py-2 text-gray-600 hover:text-primary">Dashboard</a>
+            <a href="about.html" class="block py-2 text-gray-600 hover:text-primary">About Us</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="container mx-auto px-4 py-8">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold mb-8 text-primary bg-gold mb-2 text-center px-3 py-3">About</h1>
+        <div class="text-center justify-between">
+          <button id="teamButton" onclick="toggleSection('aboutUs')" class="text-2xl text-green-500 hover-gold bg-green-50">Team</button>
+          <button id="dataModelButton" onclick="toggleSection('dataModel')" class="text-2xl text-green-500 hover-gold mx-4">Data Model</button>
+          <button id="githubButton" onclick="toggleSection('github')" class="text-2xl text-green-500 hover-gold mx-4">GitHub</button>
+        </div>
+      </div>
+
+      <!-- About Us Section -->
+      <div id="aboutUs" style="display: block">
+        <h2 class="text-center text-gray-600">
+          SurveyBull is a leading platform for creating and managing surveys.
+        </h2>
+        <!-- Team Members Flexbox Layout -->
+        <!-- Example of using Tailwind classes to set fixed width -->
+<div class="team-container flex flex-col md:flex-row gap-6 justify-center">
+  <!-- Member 1 -->
+  <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full max-w-xs">
+    <div class="overflow-hidden mx-auto mb-4">
+      <img
+        src="images/about/suraj.jpg"
+        alt="Suraj Shiva Kumar's photo"
+        class="w-full h-half object-cover"
+      />
+    </div>
+    <h3 class="text-xl font-bold text-green-500">Suraj Shiva Kumar</h3>
+    <p class="text-gray-600">Backend Developer</p>
+    <p class="mt-4 text-gray-700">
+      Suraj developed the backend architecture, including setting up the database and integrating APIs.
+    </p>
+  </div>
+
+  <!-- Member 2 -->
+  <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full max-w-xs">
+    <div class="overflow-hidden mx-auto mb-4">
+      <img
+        src="images/about/shivani.jpeg"
+        alt="Shivani Suryawanshi's photo"
+        class="w-full h-half object-cover"
+      />
+    </div>
+    <h3 class="text-xl font-bold text-green-500">Shivani Suryawanshi</h3>
+    <p class="text-gray-600">Frontend Developer</p>
+    <p class="mt-4 text-gray-700">
+      Shivani led frontend development, designing UI and layout for survey forms and dashboard.
+    </p>
+  </div>
+
+  <!-- Member 3 -->
+  <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full max-w-xs">
+    <div class="overflow-hidden mx-auto mb-4">
+      <img
+        src="images/about/Sharvari.jpg"
+        alt="Sharvari More's photo"
+        class="w-full h-half object-cover"
+      />
+    </div>
+    <h3 class="text-xl font-bold text-green-500">Sharvari More</h3>
+    <p class="text-gray-600">Software Engineer</p>
+    <p class="mt-4 text-gray-700">
+      Sharvari handled the integration of survey logic, and worked on form validations and session management.
+    </p>
+  </div>
+
+  <!-- Member 4 -->
+  <div class="team-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full max-w-xs">
+    <div class="overflow-hidden mx-auto mb-4">
+      <img
+        src="images/about/satvik.jpg"
+        alt="Venkata Sai Satvik Reddy Tanuboddi's photo"
+        class="w-full h-half object-cover"
+      />
+    </div>
+    <h3 class="text-xl font-bold text-green-500">Venkata Sai Satvik Reddy Tanuboddi</h3>
+    <p class="text-gray-600">Data Analyst</p>
+    <p class="mt-4 text-gray-700">
+      Satvik contributed to data analysis by parsing survey data and deriving insights to enhance survey process.
+    </p>
+  </div>
+</div>
+
+      </div>
+
+      <!-- Data Model Section -->
+      <div id="dataModel" style="display: none" class="text-center mt-4">
+        <img src="https://mermaid.ink/svg/pako:eNqNVMtugzAQ_BXL5-QHuEVKK0XpO1EPFReDt7CSsZHXpI3S9ttrggHFFDUcEN4d78yOzZ54biTwhINdoyisqFLN_LNr7AGO7OtruTQn9twAOTSaJSw32gnU1MGGRAA-1gFWihnEStMHWI-wkAMeIMBegGqjCSawS75LWcOmuFqQEdciUJA7kEvUqb4oeOpW7YPahehGsqftmCBnURdsj07BJLoGyi2eacdcZowCodmGnppMIZUgu-R3Tz-4Ewno4zMS4NONwR67P9bA2tdML7fbiDy4FFF30WuII6GT-sPxRAx9_G-OB1FN7b2pBKoxuhYO9liBby6r0PkjXbl_ur5GcLgokdwuGomN-riCZeLv7d_-dnSRsrWgMjPCyleEj3v_x6pY5d44oc52EPn6NGal8ZcPBrUv3rtJcnUAKwroMa23I-YOyf10Cn-Gzu5EBooikBcyIvpiNFOpJZmv0mZ3YBHIH7YIdvAFr8D6uyD9xDobkHJXghfLE_-psChdylPdAkXjzO6oc54428CCW9MUJU_ehSK_amrpfQgjr4eARGfsfTcQz3NxwWuh34ypwsbvX6acpdk" alt="ER Diagram" class="mx-auto mt-6"/>
+      </div>
+
+      <!-- GitHub Section -->
+      <div id="github" style="display: none" class="text-center mt-4">
+        <h2 class="text-2xl font-bold text-gray-700">Check our GitHub Repository</h2>
+        <p class="mt-2 text-gray-600">Visit our repository for more details about the project.</p>
+        <a href="https://github.com/surajshivkumar/SurveyBull/tree/feature-branch" class="text-blue-500 underline mt-4" target="_blank">GitHub Repository</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us - @Model.WebsiteName</title>
+    <script>
+        // Function to toggle visibility
+        function toggleSection(section) {
+            var aboutUsSection = document.getElementById('aboutUs');
+            var dataModelSection = document.getElementById('dataModel');
+            var technicalDetailsSection = document.getElementById('technicalDetails');
+            var githubSection = document.getElementById('github');
+
+            // Toggle based on section chosen
+            if (section === 'aboutUs') {
+                aboutUsSection.style.display = 'block';
+                dataModelSection.style.display = 'none';
+                technicalDetailsSection.style.display = 'none';
+                githubSection.style.display = 'none';
+            } else if (section === 'dataModel') {
+                aboutUsSection.style.display = 'none';
+                dataModelSection.style.display = 'block';
+                technicalDetailsSection.style.display = 'none';
+                githubSection.style.display = 'none';
+            } else if (section === 'technicalDetails') {
+                aboutUsSection.style.display = 'none';
+                dataModelSection.style.display = 'none';
+                technicalDetailsSection.style.display = 'block';
+                githubSection.style.display = 'none';
+            } else if (section === 'github') {
+                aboutUsSection.style.display = 'none';
+                dataModelSection.style.display = 'none';
+                technicalDetailsSection.style.display = 'none';
+                githubSection.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold mb-8 text-primary bg-gold mb-2 text-center px-3 py-3">About</h1>
+            <div class="text-center">
+                <button onclick="toggleSection('aboutUs')" class="text-2xl text-green-500 bg-green-50">Team</button>
+                <button onclick="toggleSection('dataModel')" class="text-2xl text-green-500 hover:underline mx-4">Data Model</button>
+                <button onclick="toggleSection('technicalDetails')" class="text-2xl text-green-500 hover:underline">Technical Details</button>&nbsp;&nbsp;&nbsp;
+                <button onclick="toggleSection('github')" class="text-2xl text-green-500 hover:underline">GitHub</button>
+            </div>
+        </div>
+
+        <!-- About Us Section -->
+        <div id="aboutUs" style="display: block;">
+            <h2 class="text-center text-gray-600">@Model.Description</h2>
+            <!-- Team Members Flexbox Layout -->
+            <div class="flex gap-6 justify-center">
+                @foreach (var member in Model.TeamMembers)
+                {
+                    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 text-center w-full sm:w-1/3 lg:w-1/4">
+                        <div class="rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="@member.PhotoUrl" alt="@member.Name's photo" class="w-2 h-2 object-cover" />
+                        </div>
+                        <h3 class="text-xl font-bold text-green-500">@member.Name</h3>
+                        <p class="text-gray-600">@member.Role</p>
+                        <p class="mt-4 text-gray-700">@member.Bio</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Data Model Section -->
+        <div id="dataModel" style="display: none;" class="text-center mt-4">
+            <img src="https://mermaid.ink/svg/pako:eNqNVMtugzAQ_BXL5-QHuEVKK0XpO1EPFReDt7CSsZHXpI3S9ttrggHFFDUcEN4d78yOzZ54biTwhINdoyisqFLN_LNr7AGO7OtruTQn9twAOTSaJSw32gnU1MGGRAA-1gFWihnEStMHWI-wkAMeIMBegGqjCSawS75LWcOmuFqQEdciUJA7kEvUqb4oeOpW7YPahehGsqftmCBnURdsj07BJLoGyi2eacdcZowCodmGnppMIZUgu-R3Tz-4Ewno4zMS4NONwR67P9bA2tdML7fbiDy4FFF30WuII6GT-sPxRAx9_G-OB1FN7b2pBKoxuhYO9liBby6r0PkjXbl_ur5GcLgokdwuGomN-riCZeLv7d_-dnSRsrWgMjPCyleEj3v_x6pY5d44oc52EPn6NGal8ZcPBrUv3rtJcnUAKwroMa23I-YOyf10Cn-Gzu5EBooikBcyIvpiNFOpJZmv0mZ3YBHIH7YIdvAFr8D6uyD9xDobkHJXghfLE_-psChdylPdAkXjzO6oc54428CCW9MUJU_ehSK_amrpfQgjr4eARGfsfTcQz3NxwWuh34ypwsbvX6acpdk" alt="">
+        </div>
+
+        <!-- Technical Details Section -->
+        <div id="technicalDetails" style="display: none;" class="text-center mt-4">
+            <p class="text-black text-lg mt-2">SurveyBull is a custom-built, scalable survey platform that was developed as a cost-effective alternative to external tools such as Qualtrics. It is intended for educational environments and is reasonably priced, while also incorporating research-specific tools. The platform facilitates the rapid creation, execution, and analysis of surveys through an intuitive interface. Customizable surveys, logical branching, a range of question kinds help SurveyBull improve data collecting and analysis. Interactive graphs and charts help users to get important insights from survey responses, so simplifying the whole survey process for scholarly and research purposes.</p>
+            <br><br><br>
+            <ul class="text-black text-lg mt-2 text-justify pl-10 text-left space-y-4 mt-6">
+                <li>
+                    <strong>Responsive Design:</strong> SurveyBull uses Tailwind CSS to ensure a mobile-first, responsive design that adapts smoothly to different screen sizes, providing a seamless experience on desktops, tablets, and mobile devices.
+                </li>
+                <li>
+                    <strong>Data Visualization:</strong> Interactive data visualizations, powered by Chart.js and D3.js, present survey responses in intuitive graphical formats, helping users quickly understand patterns and insights.
+                </li>
+                <li>
+                    <strong>Backend and Database:</strong> The backend is built on Node.js and Express.js, with data securely stored in a PostgreSQL database, allowing for efficient data management and high scalability.
+                </li>
+                <li>
+                    <strong>Data Security:</strong> SurveyBull employs robust security practices, including encryption and role-based access controls, to protect user data and ensure only authorized users have access.
+                </li>
+                <li>
+                    <strong>Survey Creation & Management:</strong> Users can create customized surveys with various question types, branching logic, and response limits, offering a flexible tool for gathering valuable feedback.
+                </li>
+            </ul>
+        </div>
+
+        <!-- GitHub Section -->
+        <!-- GitHub Section -->
+        <div id="github" style="display: none" class="text-center mt-4">
+            <h2 class="text-2xl font-bold text-gray-700">Check our GitHub Repository</h2>
+            <p class="mt-2 text-gray-600">Visit our repository for more details about the project.</p>
+            <a href="https://github.com/surajshivkumar/SurveyBull/tree/feature-branch" class="text-blue-500 underline mt-4">GitHub Repository</a>
+        </div>
+    </div>
+</body>
+</html>
